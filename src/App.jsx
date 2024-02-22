@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 import AR from './AR';
+import React from 'react'
 
 const App = () => {
     return (
@@ -45,14 +46,14 @@ const App = () => {
 
 const Home = () => {
     return (
-        <>
-            <h2>Home</h2>
+        <div className="home-container" style={{ fontSize: '50px', marginLeft: '800px' }}>
+            <h2 className="home-title">Home</h2>
             <nav>
-            <NavLink to="/ar">
-                AR
+                <NavLink className="nav-link" to="/ar" style={{ color: 'teal', marginLeft: '80px' }} >
+                    AR
                 </NavLink>
             </nav>
-        </>
+        </div>
     );
 };
 
