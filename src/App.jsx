@@ -1,14 +1,13 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 import AR from './AR';
-import React from 'react'
 
 const App = () => {
     return (
         <Routes>
-                <Route index element={<Home />} />
-                <Route path="home" element={<Home />} />
-                <Route path="ar" element={<AR />} />
-                <Route path="*" element={<p>There is nothing here: 404!</p>} />
+            <Route index element={<Home />} />
+            <Route path="home" element={<Home />} />
+            <Route path="ar" element={<AR />} />
+            <Route path="*" element={<p>There is nothing here: 404!</p>} />
 
         </Routes>
     );
