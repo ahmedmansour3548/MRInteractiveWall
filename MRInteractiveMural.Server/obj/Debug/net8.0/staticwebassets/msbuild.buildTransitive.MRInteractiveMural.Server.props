@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\MRInteractiveMural.Server.props" />
+</Project>

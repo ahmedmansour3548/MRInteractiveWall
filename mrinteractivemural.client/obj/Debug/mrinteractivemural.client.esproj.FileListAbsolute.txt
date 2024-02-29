@@ -1,0 +1,3 @@
+C:\Users\kendr\Documents\UCF\MRInteractiveWall\MRInteractiveWall\API\MRInteractiveMural\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
+C:\Users\kendr\Documents\UCF\InteractiveWall\MRInteractiveMural\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall-Server\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
