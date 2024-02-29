@@ -1,88 +1,143 @@
-import React, { useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import './AR.css';
 
 const AR = () => {
-    useEffect(() => {
-        // Function to handle marker found and lost
-        const handleMarkerEvents = (marker, camera) => {
-            let check; // Interval ID for distance checks
 
-            const markerFound = () => {
-                check = setInterval(() => {
-                    const cameraPosition = camera.object3D.position;
-                    const markerPosition = marker.object3D.position;
-                    const distance = cameraPosition.distanceTo(markerPosition);
 
-                    console.log(distance);
-                }, 100);
-            };
+    const cameraButton = {
+        position: 'fixed',
+        bottom: '10px',
+        right: '10px',
+        fontSize: '18px',
+        color: 'white',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        padding: '10px',
+        borderRadius: '5px',
+    };
 
-            const markerLost = () => {
-                clearInterval(check);
-            };
+    const displayMessage = {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        textAlign: 'center',
+        fontSize: '24px',
+        color: 'black',
+    };
 
-            // Add event listeners
-            marker.addEventListener('markerFound', markerFound);
-            marker.addEventListener('markerLost', markerLost);
+    const [isSceneVisible, setIsSceneVisible] = useState(true);
 
-            // Cleanup function for these listeners
-            return () => {
-                marker.removeEventListener('markerFound', markerFound);
-                marker.removeEventListener('markerLost', markerLost);
-                clearInterval(check);
-            };
-        };
+    const toggleSceneVisibility = () => {
+        setIsSceneVisible(prevState => !prevState);
+    };
 
-        // Ensure the scene is loaded before adding event listeners
-        const sceneEl = document.querySelector('a-scene');
-        if (sceneEl) {
-            sceneEl.addEventListener('loaded', () => {
-                const camera = document.querySelector('[camera]');
-                const marker = document.querySelector('a-marker');
-                if (marker && camera) {
-                    // Call the function and get back the cleanup function
-                    const cleanup = handleMarkerEvents(marker, camera);
+    const handleButtonClick = () => {
+        console.log("yipee!");
+    };
 
-                    // Cleanup listeners when component unmounts
-                    return cleanup;
-                }
-            });
-        }
-    }, []);
     return (
         <>
             <NavLink to="/home">Home</NavLink>
-            <a-scene arjs='sourceType: webcam; debugUIEnabled: false'>
-                <a-marker preset="hiro">
-                    <a-entity gltf-model="https://ahmedmansour3548.github.io/MRInteractiveWallPage/scene.gltf"
-                        position="0.5 1 1"
-                        scale="0.02 0.02 0.02"
+            <div className="buttons">
+                <button className="start-animation-button" onClick={handleButtonClick}>Start Animation</button>
+            </div>
+            <button style={cameraButton} onClick={toggleSceneVisibility}>
+
+                {isSceneVisible ? 'Camera On' : 'Camera Off'}
+            </button>
+
+           
+
+
+            {isSceneVisible && (
+                <a-scene gesture-detector arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5; debugUIEnabled: true;' click-listener>
+                    <a-marker type="barcode" value="0" id="interactable-marker">
+                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="robot" position="0 0 0" scale="3 3 3"
+                            material="opacity: 1" debug-raycaster>
+                            <a-entity data-raycastable gltf-model="/src/assets/robot/robot.glb"
+                                position="0 0 0.5"
+                                scale="0.2 0.2 0.2"
+                                animation-mixer="clip: idle; loop: repeat">
+                            </a-entity>
+                        </a-plane>
+                    </a-marker>
+                    <a-marker type="barcode" value="1" id="interactable-marker">
+                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="triangle" position="0 0 0" scale="3 3 3"
+                            material="opacity: 1;" debug-raycaster>
+                            <a-entity data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
+                                position="0 0 0.1"
+                                scale="0.2 0.2 0.2"
+                                animation-mixer="clip: animation0; loop: repeat">
+                            </a-entity>
+                        </a-plane>
+                    </a-marker>
+                    <a-marker type="barcode" value="2" id="interactable-marker">
+                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="bluebox" position="0 0 0" scale="3 3 3"
+                            material="opacity: 1;" debug-raycaster>
+                            <a-box id="animated-model"  data-raycastable position='0 0 0.2' scale='0.1 0.1 0.1' material='color: blue; opacity: 0.8;'
+                                animation="property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear">
+                            </a-box>
+                        </a-plane>
+                    </a-marker>
+                    <a-marker type="barcode" value="3" id="interactable-marker">
+                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="redbox" position="0 0 0" scale="3 3 3"
+                            material="opacity: 1;" debug-raycaster>
+                            <a-box id="animated-model" name="redbox" data-raycastable class="interactive-entity" position='0 0 0.2' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
+                                animation="property: scale; to: 0.3 0.3 0.3; dir: alternate; dur: 2000; easing: easeInOutQuad; loop: true">
+                            </a-box>
+                        </a-plane>
+                    </a-marker>
+                    {/*</a-entity>
+                        <a-entity id="animated-model" name="triangle" data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
+                        position="-0.5 1 1"
+                        scale="0.2 0.2 0.2"
+                            animation-mixer="clip: *; loop: repeat; timeScale: 1;">
+                            
+                        </a-entity>
+                        <a-plane id="animated-model" data-raycastable name="triangleinvisible" position="-0.5 1 1" scale="1 1 1"
+                            material="opacity: 0.5; transparent: true"
+           
+                        ></a-plane>
+                        <a-entity id="animated-model" name="robot" data-raycastable gltf-model="/src/assets/robot/robot.glb"
+                        position="-0.5 0.5 1"
+                        scale="0.2 0.2 0.2"
                         animation-mixer="clip: *; loop: repeat; timeScale: 1;">
                     </a-entity>
-                    {/* Original Red Box - Shrinking and Growing */}
-                    <a-box position='0 1 0' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
+                    */}{/* Red Box */}{/*
+                        <a-box id="animated-model" name="redbox" data-raycastable class="interactive-entity" position='0 -0.5 0' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
                         animation="property: scale; to: 0.5 0.5 0.5; dir: alternate; dur: 2000; easing: easeInOutQuad; loop: true">
                     </a-box>
-                    {/* Blue Box - Rotating */}
-                    <a-box position='-1 1.5 0' scale='0.1 0.1 0.1' material='color: blue; opacity: 0.8;'
+                    */}{/* Blue Box */}{/*
+                        <a-box id="animated-model" name="bluebox" data-raycastable position='0 0 0.5' scale='0.1 0.1 0.1' material='color: blue; opacity: 0.8;'
                         animation="property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear">
                     </a-box>
-                    {/* Green Box - Moving Up and Down */}
-                    <a-box position='1.2 1.6 0' scale='0.15 0.15 0.15' material='color: green; opacity: 0.6;'
+                    */}{/* Green Box */}{/*
+                        <a-box id="animated-model" name="greenbox" data-raycastable position='0 0 0' scale='0.15 0.15 0.15' material='color: green; opacity: 0.6;'
                         animation="property: position; to: 0.2 0.4 0; dir: alternate; dur: 3000; easing: easeInOutSine; loop: true">
                     </a-box>
-                    {/* Yellow Box - Fading In and Out */}
-                    <a-box position='0 2.5 -0.2' scale='0.12 0.12 0.12' material='color: yellow; opacity: 1;'
+                    */}{/* Yellow Box */}{/*
+                        <a-box id="animated-model" name="yellowbox" data-raycastable position='0.6 -0.3 -0.6' scale='0.12 0.12 0.12' material='color: yellow; opacity: 1;'
                         animation="property: material.opacity; from: 1; to: 0.1; dir: alternate; dur: 5000; easing: easeInOutQuad; loop: true">
                     </a-box>
-                    {/* Purple Box - Spinning and Moving Forward and Backward */}
-                    <a-box position='0 1.7 0' scale='0.2 0.05 0.05' material='color: purple; opacity: 0.9;'
+                    */}{/* Purple Box */}{/*
+                        <a-box id="animated-model" name="purplebox" data-raycastable position='0.9 0 0' scale='0.2 0.05 0.05' material='color: purple; opacity: 0.9;'
                         animation="property: rotation; to: 0 0 360; loop: true; dur: 2000; easing: linear"
                         animation__pos="property: position; to: 0 0.4 0.3; dir: alternate; dur: 4500; easing: easeInOutSine; loop: true">
-                    </a-box>
-                </a-marker>
-                <a-entity camera></a-entity>
-            </a-scene>
+                    </a-box>*/}
+
+                
+                    <a-camera
+                        id="camera"
+
+                        look-controls="enabled: false"
+                        position="0 0 0"
+                        raycaster="objects: .clickable"
+                        cursor="fuse: false;
+                            rayOrigin: mouse;">
+                </a-camera>
+                </a-scene>
+            )}
         </>
     );
 };
