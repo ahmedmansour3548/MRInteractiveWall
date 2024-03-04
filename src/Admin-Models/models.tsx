@@ -1,6 +1,5 @@
 import React from "react";
 import { Datagrid, List, TextField, EmailField, UrlField, SimpleList,ReferenceField, EditButton, Edit, SimpleForm,  ReferenceInput,TextInput, Create } from "react-admin";
-import MyUrlField from './MyUrlField';
 
 export const ModelList = () => (
     <List>
