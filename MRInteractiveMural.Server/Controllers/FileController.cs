@@ -13,13 +13,13 @@ namespace YourNamespace.Controllers
         [HttpPost("move")]
         public async Task<IActionResult> MoveFile()
         {
-            string sourcePath = "C:\\Users\\kendr\\OneDrive\\Desktop\\Sauron.jpg";
-            String destinationPath = "C:\\Users\\kendr\\OneDrive\\Desktop\\ServerFolder\\Sauron.jpg";
-            using var connection = new MySqlConnection("Server=localhost:3306;User ID=root;Password=Alessandra99>;Database=mr-mural");
+            string sourcePath = "C:\\Users\\Ahmed\\Playground\\Models\\Sauron.jpg";
+            String destinationPath = "C:\\Users\\Ahmed\\Playground\\Models\\Moved\\Sauron.jpg";
+            using var connection = new MySqlConnection("Server=localhost;User ID=root;Password=pass;Database=mr-mural");
 
 
-            try
-            {
+
+            try {
 
                 // Check if the source file exists
                 if (!System.IO.File.Exists(sourcePath))

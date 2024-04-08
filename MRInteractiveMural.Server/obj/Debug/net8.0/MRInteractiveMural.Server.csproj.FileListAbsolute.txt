@@ -153,3 +153,43 @@ C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server\
 C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.pdb
 C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.genruntimeconfig.cache
 C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server\obj\Debug\net8.0\ref\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\appsettings.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\spa.proxy.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MRInteractiveMural.Server.exe
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MRInteractiveMural.Server.deps.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MRInteractiveMural.Server.runtimeconfig.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MRInteractiveMural.Server.pdb
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Microsoft.AspNetCore.SpaProxy.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\MySqlConnector.DependencyInjection.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.csproj.AssemblyReference.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\spa.proxy.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.AssemblyInfoInputs.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.AssemblyInfo.cs
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.csproj.CoreCompileInputs.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets\msbuild.MRInteractiveMural.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets\msbuild.build.MRInteractiveMural.Server.props
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.MRInteractiveMural.Server.props
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MRInteractiveMural.Server.props
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\scopedcss\bundle\MRInteractiveMural.Server.styles.css
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.csproj.CopyComplete
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\refint\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.pdb
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.genruntimeconfig.cache
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\obj\Debug\net8.0\ref\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\bin\Debug\net8.0\BCrypt.Net-Next.dll

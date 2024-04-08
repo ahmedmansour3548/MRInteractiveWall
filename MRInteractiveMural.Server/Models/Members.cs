@@ -9,7 +9,7 @@ namespace MRInteractiveMural.Server.Models
         public string name { get; set; }
         public string number { get; set; }
         public string email { get; set; }
-        public string notes { get; set; }
+        public string note { get; set; }
         public string role { get; set; }
     }
 }

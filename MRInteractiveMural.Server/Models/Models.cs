@@ -11,7 +11,7 @@ namespace MRInteractiveMural.Server.Models
         public string modelName { get; set; } = "";
         public int labMemberID { get; set; }
         public string modelFilePath { get; set; } = "";
-        public string fileName { get; set; } = "";
+        public string modelFileName { get; set; } = "";
         public JsonValue fileImport { get; set; } = null;
     }
 }

@@ -9,19 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MRInteractiveMural.Server
 build_property.RootNamespace = MRInteractiveMural.Server
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\
-=======
-build_property.ProjectDir = C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server\
->>>>>>> 89b2461d833ac890bdf8615b43cf459b8b2d3808
+build_property.ProjectDir = C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
-build_property.MSBuildProjectDirectory = C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server
-=======
-build_property.MSBuildProjectDirectory = C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\MRInteractiveMural.Server
->>>>>>> 89b2461d833ac890bdf8615b43cf459b8b2d3808
+build_property.MSBuildProjectDirectory = C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\MRInteractiveMural.Server
 build_property._RazorSourceGeneratorDebug = 

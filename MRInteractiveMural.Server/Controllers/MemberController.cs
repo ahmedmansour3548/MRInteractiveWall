@@ -11,18 +11,18 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace MRInteractiveMural.Server.Controllers
 {
-    [Route("")]
+    [Route("api")]
     [ApiController]
     public class MemberController : ControllerBase
     {
 
-        [HttpGet("users")]
+        [HttpGet("members")]
         public async Task<ActionResult<IEnumerable<Members>>> GetUsers()
         {
             List<Members> members = new List<Members>();
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
             connection.Open();
-            using var command = new MySqlCommand("SELECT id, name, number, email, notes, role from members order by id", connection);
+            using var command = new MySqlCommand("SELECT id, name, number, email, note, role from members order by id", connection);
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
@@ -32,7 +32,7 @@ namespace MRInteractiveMural.Server.Controllers
                     name = reader["name"].ToString() ?? "",
                     number = reader["number"].ToString() ?? "",
                     email = reader["email"].ToString() ?? "",
-                    notes = reader["notes"].ToString() ?? "",
+                    note = reader["note"].ToString() ?? "",
                     role = reader["role"].ToString() ?? ""
                 });
             }
@@ -43,14 +43,14 @@ namespace MRInteractiveMural.Server.Controllers
             return members;
         }
 
-        [HttpGet("users/{userId}")]
+        [HttpGet("members/{userId}")]
         public ActionResult<Members> GetUsersFiltered(int userId)
         {
             int id = userId;
             Members member  = new Members();
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
             connection.Open();
-            string query = $"SELECT id, name, number, email, notes, role from members where id = {id}";
+            string query = $"SELECT id, name, number, email, note, role from members where id = {id}";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -61,7 +61,7 @@ namespace MRInteractiveMural.Server.Controllers
                     name = reader["name"].ToString() ?? "",
                     number = reader["number"].ToString() ?? "",
                     email = reader["email"].ToString() ?? "",
-                    notes = reader["notes"].ToString() ?? "",
+                    note = reader["note"].ToString() ?? "",
                     role = reader["role"].ToString() ?? ""
                 };
             }
@@ -70,19 +70,19 @@ namespace MRInteractiveMural.Server.Controllers
             return member;
         }
 
-        [HttpPost("users")]
+        [HttpPost("members")]
         public Members AddUser(Members member)
         {
             
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
-            string query = @"INSERT INTO members (id, name, number, email, notes, role) values (@id, @name, @number, @email, @notes, @role)";
+            string query = @"INSERT INTO members (id, name, number, email, note, role) values (@id, @name, @number, @email, @note, @role)";
             using var command = new MySqlCommand(query, connection);
             command.CommandText = query;
             command.Parameters.AddWithValue("@id", (int)member.id);
             command.Parameters.AddWithValue("@name", member.name);
             command.Parameters.AddWithValue("@number", member.number);
             command.Parameters.AddWithValue("@email", member.email);
-            command.Parameters.AddWithValue("@notes", member.notes);
+            command.Parameters.AddWithValue("@note", member.note);
             command.Parameters.AddWithValue("@role", member.role);
             connection.Open();
             command.ExecuteNonQuery();
@@ -91,17 +91,17 @@ namespace MRInteractiveMural.Server.Controllers
             return member;
         }
 
-        [HttpPut("users/{userId}")]
+        [HttpPut("members/{userId}")]
         public Members UpdateUser(Members member)
         {
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
-            string query = $"UPDATE members SET name = @name, number = @number, email = @email, notes = @notes, role = @role WHERE id = {member.id}";
+            string query = $"UPDATE members SET name = @name, number = @number, email = @email, note = @note, role = @role WHERE id = {member.id}";
             using var command = new MySqlCommand(query, connection);
             command.CommandText = query;
             command.Parameters.AddWithValue("@name", member.name);
             command.Parameters.AddWithValue("@number", member.number);
             command.Parameters.AddWithValue("@email", member.email);
-            command.Parameters.AddWithValue("@notes", member.notes);
+            command.Parameters.AddWithValue("@note", member.note);
             command.Parameters.AddWithValue("@role", member.role);
             connection.Open();
             command.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace MRInteractiveMural.Server.Controllers
             return member;
         }
 
-        [HttpDelete("users/{userId}")]
+        [HttpDelete("members/{userId}")]
         public void DeleteUser(int userId)
         {
             int id = userId;
