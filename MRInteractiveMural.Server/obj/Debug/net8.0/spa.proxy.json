@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall-Server\\MRInteractiveMural.Server\\..\\mrinteractivemural.client",
+"WorkingDirectory": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\..\\mrinteractivemural.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

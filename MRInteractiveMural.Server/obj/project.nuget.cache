@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qN0grox38TRSkNskOkPqbEbJ3vN26eaFr9TJAqRqydJKsHePlYYWp4DmIyw0HvDW9tyRgPSYxjSTQ+oWHKMW6w==",
+  "dgSpecHash": "h7sD1p21hItPxyJvGTFlTfUKUNiHyIiL/58ENJPmutHw806uc/G3Yb/Piu3SQeikQLNieqQxR7T5mSthsfBYTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall-Server\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
+  "projectFilePath": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.2\\microsoft.aspnetcore.spaproxy.8.0.2.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.2\\microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
