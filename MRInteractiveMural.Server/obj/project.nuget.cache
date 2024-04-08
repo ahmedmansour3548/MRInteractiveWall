@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LTiW8KxACNS/L6PZqQ3G/nMHH/ecHrG8brM4uzGo3PQ92+k/CSYPpIDJjFeJ5PBi6vubiiijgai1Ubb58ph7/Q==",
+  "dgSpecHash": "vDRUY/Z6126/QyZMXpA9jxKVq9KlSmQME8M7TyM6UwtNi+0eP9wXQlW7BToBDDy7zrOTU3pXPCdY1EY9bJrT3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
+  "projectFilePath": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmed\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.3\\microsoft.aspnetcore.spaproxy.8.0.3.nupkg.sha512",

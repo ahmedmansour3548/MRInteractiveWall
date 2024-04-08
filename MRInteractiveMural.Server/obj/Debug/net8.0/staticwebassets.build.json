@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "1fY3PnDNHqjEe7pe2grVhVhUzbyWANRpPu8OhGVuQqE=",
+  "Hash": "/3bsfmDnijdBUkf13rUs8qCtuDQn0Y+HcdDQaay5UaA=",
   "Source": "MRInteractiveMural.Server",
   "BasePath": "_content/MRInteractiveMural.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\mrinteractivemural.client\\mrinteractivemural.client.esproj",
+      "Identity": "C:\\Users\\Ahmed\\Playground\\MRIW\\mrinteractivemural.client\\mrinteractivemural.client.esproj",
       "Version": 2,
       "Source": "mrinteractivemural.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

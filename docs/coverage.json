@@ -1,0 +1,22 @@
+{
+  "coverage": "0%",
+  "expectCount": 9,
+  "actualCount": 0,
+  "files": {
+    "src/ar-camera-extra.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        23,
+        26,
+        30,
+        34
+      ]
+    }
+  }
+}

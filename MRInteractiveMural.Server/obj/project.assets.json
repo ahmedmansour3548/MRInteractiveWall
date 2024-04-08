@@ -1137,13 +1137,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
+      "projectUniqueName": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
       "projectName": "MRInteractiveMural.Server",
-      "projectPath": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
+      "projectPath": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
       "packagesPath": "C:\\Users\\Ahmed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\MRInteractiveMural.Server\\obj\\",
+      "outputPath": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
+        "C:\\Users\\Ahmed\\Playground\\MRIW\\NuGet.Config",
         "C:\\Users\\Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1151,7 +1152,6 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

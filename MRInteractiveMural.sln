@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRInteractiveMural.Server", "MRInteractiveMural.Server\MRInteractiveMural.Server.csproj", "{D607791F-7F77-4B91-877A-4F48B832FC95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRInteractiveMural.Server", "MRInteractiveMural.Server\MRInteractiveMural.Server.csproj", "{D607791F-7F77-4B91-877A-4F48B832FC95}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "mrinteractivemural.client", "mrinteractivemural.client\mrinteractivemural.client.esproj", "{920CA0F0-6BCC-4095-B0E8-47D1D956B90C}"
 EndProject

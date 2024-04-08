@@ -3,3 +3,4 @@ C:\Users\kendr\Documents\UCF\InteractiveWall\MRInteractiveMural\mrinteractivemur
 C:\Users\Ahmed\Playground\MRInteractiveWall-Server\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
 C:\Users\kendr\Documents\UCF\newMRI\MRInteractiveWall\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
 C:\Users\Ahmed\Playground\MRInteractiveWall 3-7\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache
+C:\Users\Ahmed\Playground\MRIW\mrinteractivemural.client\obj\Debug\mrinteractivemural.client.esproj.CoreCompileInputs.cache

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './AR.css';
 
@@ -16,7 +16,7 @@ const AR = () => {
         borderRadius: '5px',
     };
 
-    const displayMessage = {
+    /*const displayMessage = {
         position: 'fixed',
         top: '50%',
         left: '50%',
@@ -24,7 +24,7 @@ const AR = () => {
         textAlign: 'center',
         fontSize: '24px',
         color: 'black',
-    };
+    };*/
 
     const [isSceneVisible, setIsSceneVisible] = useState(true);
 
