@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/gestures.js | mrinteractivemural.client</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AR">AR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Drawer">Drawer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Home">Home</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/gestures.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* global AFRAME */
+
+AFRAME.registerComponent(&quot;gesture-handler&quot;, {
+    schema: {
+        enabled: { default: true },
+        rotationFactor: { default: 5 },
+        minScale: { default: 0.3 },
+        maxScale: { default: 8 },
+    },
+
+    init: function () {
+        this.handleScale = this.handleScale.bind(this);
+        this.handleRotation = this.handleRotation.bind(this);
+
+        this.isVisible = false;
+        this.initialScale = this.el.object3D.scale.clone();
+        this.scaleFactor = 1;
+
+        this.el.sceneEl.addEventListener(&quot;markerFound&quot;, (e) =&gt; {
+            this.isVisible = true;
+        });
+
+        this.el.sceneEl.addEventListener(&quot;markerLost&quot;, (e) =&gt; {
+            this.isVisible = false;
+        });
+    },
+
+    update: function () {
+        if (this.data.enabled) {
+            this.el.sceneEl.addEventListener(&quot;onefingermove&quot;, this.handleRotation);
+            this.el.sceneEl.addEventListener(&quot;twofingermove&quot;, this.handleScale);
+        } else {
+            this.el.sceneEl.removeEventListener(&quot;onefingermove&quot;, this.handleRotation);
+            this.el.sceneEl.removeEventListener(&quot;twofingermove&quot;, this.handleScale);
+        }
+    },
+
+    remove: function () {
+        this.el.sceneEl.removeEventListener(&quot;onefingermove&quot;, this.handleRotation);
+        this.el.sceneEl.removeEventListener(&quot;twofingermove&quot;, this.handleScale);
+    },
+
+    handleRotation: function (event) {
+        if (this.isVisible) {
+            this.el.object3D.rotation.y +=
+                event.detail.positionChange.x * this.data.rotationFactor;
+            this.el.object3D.rotation.x +=
+                event.detail.positionChange.y * this.data.rotationFactor;
+        }
+    },
+
+    handleScale: function (event) {
+        if (this.isVisible) {
+            this.scaleFactor *=
+                1 + event.detail.spreadChange / event.detail.startSpread;
+
+            this.scaleFactor = Math.min(
+                Math.max(this.scaleFactor, this.data.minScale),
+                this.data.maxScale
+            );
+
+            this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;
+            this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;
+            this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;
+        }
+    },
+});
+
+// Component that detects and emits events for touch gestures
+
+AFRAME.registerComponent(&quot;gesture-detector&quot;, {
+    schema: {
+        element: { default: &quot;&quot; }
+    },
+
+    init: function () {
+        this.targetElement =
+            this.data.element &amp;&amp; document.querySelector(this.data.element);
+
+        if (!this.targetElement) {
+            this.targetElement = this.el;
+        }
+
+        this.internalState = {
+            previousState: null
+        };
+
+        this.emitGestureEvent = this.emitGestureEvent.bind(this);
+
+        this.targetElement.addEventListener(&quot;touchstart&quot;, this.emitGestureEvent);
+
+        this.targetElement.addEventListener(&quot;touchend&quot;, this.emitGestureEvent);
+
+        this.targetElement.addEventListener(&quot;touchmove&quot;, this.emitGestureEvent);
+    },
+
+    remove: function () {
+        this.targetElement.removeEventListener(&quot;touchstart&quot;, this.emitGestureEvent);
+
+        this.targetElement.removeEventListener(&quot;touchend&quot;, this.emitGestureEvent);
+
+        this.targetElement.removeEventListener(&quot;touchmove&quot;, this.emitGestureEvent);
+    },
+
+    emitGestureEvent(event) {
+        const currentState = this.getTouchState(event);
+
+        const previousState = this.internalState.previousState;
+
+        const gestureContinues =
+            previousState &amp;&amp;
+            currentState &amp;&amp;
+            currentState.touchCount == previousState.touchCount;
+
+        const gestureEnded = previousState &amp;&amp; !gestureContinues;
+
+        const gestureStarted = currentState &amp;&amp; !gestureContinues;
+
+        if (gestureEnded) {
+            const eventName =
+                this.getEventPrefix(previousState.touchCount) + &quot;fingerend&quot;;
+
+            this.el.emit(eventName, previousState);
+
+            this.internalState.previousState = null;
+        }
+
+        if (gestureStarted) {
+            currentState.startTime = performance.now();
+
+            currentState.startPosition = currentState.position;
+
+            currentState.startSpread = currentState.spread;
+
+            const eventName =
+                this.getEventPrefix(currentState.touchCount) + &quot;fingerstart&quot;;
+
+            this.el.emit(eventName, currentState);
+
+            this.internalState.previousState = currentState;
+        }
+
+        if (gestureContinues) {
+            const eventDetail = {
+                positionChange: {
+                    x: currentState.position.x - previousState.position.x,
+
+                    y: currentState.position.y - previousState.position.y
+                }
+            };
+
+            if (currentState.spread) {
+                eventDetail.spreadChange = currentState.spread - previousState.spread;
+            }
+
+            // Update state with new data
+
+            Object.assign(previousState, currentState);
+
+            // Add state data to event detail
+
+            Object.assign(eventDetail, previousState);
+
+            const eventName =
+                this.getEventPrefix(currentState.touchCount) + &quot;fingermove&quot;;
+
+            this.el.emit(eventName, eventDetail);
+        }
+    },
+
+    getTouchState: function (event) {
+        if (event.touches.length === 0) {
+            return null;
+        }
+
+        // Convert event.touches to an array so we can use reduce
+
+        const touchList = [];
+
+        for (let i = 0; i &lt; event.touches.length; i++) {
+            touchList.push(event.touches[i]);
+        }
+
+        const touchState = {
+            touchCount: touchList.length
+        };
+
+        // Calculate center of all current touches
+
+        const centerPositionRawX =
+            touchList.reduce((sum, touch) =&gt; sum + touch.clientX, 0) /
+            touchList.length;
+
+        const centerPositionRawY =
+            touchList.reduce((sum, touch) =&gt; sum + touch.clientY, 0) /
+            touchList.length;
+
+        touchState.positionRaw = { x: centerPositionRawX, y: centerPositionRawY };
+
+        // Scale touch position and spread by average of window dimensions
+
+        const screenScale = 2 / (window.innerWidth + window.innerHeight);
+
+        touchState.position = {
+            x: centerPositionRawX * screenScale,
+            y: centerPositionRawY * screenScale
+        };
+
+        // Calculate average spread of touches from the center point
+
+        if (touchList.length &gt;= 2) {
+            const spread =
+                touchList.reduce((sum, touch) =&gt; {
+                    return (
+                        sum +
+                        Math.sqrt(
+                            Math.pow(centerPositionRawX - touch.clientX, 2) +
+                            Math.pow(centerPositionRawY - touch.clientY, 2)
+                        )
+                    );
+                }, 0) / touchList.length;
+
+            touchState.spread = spread * screenScale;
+        }
+
+        return touchState;
+    },
+
+    getEventPrefix(touchCount) {
+        const numberNames = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;many&quot;];
+
+        return numberNames[Math.min(touchCount, 4) - 1];
+    }
+});</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

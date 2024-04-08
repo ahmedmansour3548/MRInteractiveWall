@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/Home.js | mrinteractivemural.client</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Admin">Admin</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AR">AR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Drawer">Drawer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Home">Home</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Home.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { useCallback, useState, useEffect } from &apos;react&apos;;
+import { Drawer } from &apos;./Drawer&apos;;
+
+/**
+ * A custom React hook that manages the state and behavior for the Home component.
+ * It handles navigation, interaction, and the background effects.
+ * 
+ * @returns {Object} The state values and functions neccessary to interface with {@link HomeComponent}.
+ */
+export const Home = () =&gt; {
+    /**
+     * State to manage the state of the drawer component.
+     */
+    const { isDrawerOpen, toggleDrawer } = Drawer();
+
+    /**
+     * State to manage the viewport size for background effects.
+     */
+    const [viewportSize, setViewportSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
+
+    /**
+     * A memoized callback that calculates the number of squares based on the current viewport size.
+     * It divides the viewport into a grid of squares, each with a side length defined by `squareSize`.
+     * 
+     * @returns {Array&lt;Object&gt;} An array of objects where each object represents a unique square with a random color.
+     */
+    const calculateSquares = useCallback(() =&gt; {
+        const squareSize = 20;
+        const widthSquares = Math.floor(window.innerWidth / squareSize);
+        const heightSquares = Math.floor(window.innerHeight / squareSize);
+        const numSquares = widthSquares * heightSquares;
+
+        return Array.from({ length: numSquares }, (_, i) =&gt; ({
+            id: i,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        }));
+    }, []);
+
+    /**
+     * An effect that listens for window resize events to update the `viewportSize` state,
+     * ensuring that the grid of squares is recalculated and rendered correctly for the new viewport size.
+     */
+    useEffect(() =&gt; {
+        const handleResize = () =&gt; {
+            setViewportSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        };
+
+        window.addEventListener(&apos;resize&apos;, handleResize);
+
+        return () =&gt; window.removeEventListener(&apos;resize&apos;, handleResize);
+    }, []);
+
+    /**
+     * State to store the calculated squares. It is initially populated by calling `calculateSquares`.
+     */
+    const [squares, setSquares] = useState(calculateSquares());
+
+    /**
+     * An effect that recalculates the squares any time the viewport size changes.
+     */
+    useEffect(() =&gt; {
+        setSquares(calculateSquares());
+    }, [viewportSize, calculateSquares]);
+
+    /**
+     * An effect that periodically updates the color of each square to create a dynamic, animated pattern.
+     * It uses a 1-second interval to randomly assign new colors to all squares.
+     */
+    useEffect(() =&gt; {
+        const intervalId = setInterval(() =&gt; {
+            setSquares((squares) =&gt;
+                squares.map((square) =&gt; ({
+                    ...square,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                }))
+            );
+        }, 1000);
+
+        return () =&gt; clearInterval(intervalId);
+    }, [calculateSquares]);
+
+    return { squares, isDrawerOpen, toggleDrawer };
+};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

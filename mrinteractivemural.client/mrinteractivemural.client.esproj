@@ -11,4 +11,10 @@
   <ItemGroup>
     <Folder Include="src\assets\Markers\3x3\" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="public\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="public\NewFolder\**" />
+  </ItemGroup>
 </Project>

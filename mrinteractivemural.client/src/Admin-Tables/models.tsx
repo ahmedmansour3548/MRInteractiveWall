@@ -10,7 +10,7 @@ export const ModelList = () => (
             <TextField source="modelName" />
             <ReferenceField source="labMemberID" reference="users" /> 
             <TextField source="modelFilePath" />
-            <TextField source="fileName" />
+            <TextField source="modelFileName" />
             <EditButton />
         </Datagrid>
     </List>
@@ -29,7 +29,7 @@ export const ModelEdit = () => (
                 />
             </ReferenceInput>
             <TextInput source="modelFilePath"/>
-            <FileInput source="fileName">
+            <FileInput source="modelFileName">
                 <FileField source="src" title="title" />
             </FileInput>
         </SimpleForm>

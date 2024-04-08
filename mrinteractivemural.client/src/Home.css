@@ -1,0 +1,116 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.patternGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px); /* Adjust based on square size */
+    grid-auto-rows: 200px; /* Should match the column width for square cells */
+    justify-content: center;
+    align-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.patternGrid.darken {
+    filter: brightness(50%);
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 100;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    transition: background-color 5s ease;
+}
+
+.drawerContainer {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.toggleDrawerButton {
+    width: 10%;
+    background-color: #ffca06;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 1px;
+    transition: background-color 0.3s;
+    font-weight: 1000;
+    font-size: 0.75em;
+    margin-top: 75px;
+}
+
+.toggleDrawerButton:hover {
+    background-color: darkgoldenrod;
+}
+
+.navLinkContainer {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+.navLinkContainer img {
+    max-width: 80%;
+    height: 600px;
+    margin-bottom: 30px;
+    border: 50px solid #2323233e;
+}
+
+.navLink {
+    
+    width: 35%;
+    background-color: #ffca06;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: 1000;
+    font-size: 2em;
+}
+
+.navLink:hover {
+    background-color: darkgoldenrod;
+}

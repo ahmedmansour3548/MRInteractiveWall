@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/events.js | mrinteractivemural.client</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AR">AR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Drawer">Drawer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Home">Home</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/events.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">AFRAME.registerComponent(&apos;markerhandler&apos;, {
+    init: function () {
+        // Initialize clipNames here instead of in the schema to ensure it&apos;s always defined.
+        this.clipNames = [&apos;idle&apos;, &apos;hiphop&apos;, &apos;chicken&apos;, &apos;pockets&apos;];
+        this.currentClipIndex = 0;
+
+        this.el.addEventListener(&apos;model-loaded&apos;, () =&gt; {
+            const planeEl = this.el.querySelector(&apos;#model-wrapper&apos;);
+            if (planeEl) {
+                planeEl.addEventListener(&apos;click&apos;, () =&gt; {
+                    const targetEl = planeEl.querySelector(&apos;[gltf-model]&apos;);
+                    if (targetEl) {
+                        // Use this.clipNames and this.currentClipIndex here
+                        this.currentClipIndex = (this.currentClipIndex + 1) % this.clipNames.length;
+                        const clipName = this.clipNames[this.currentClipIndex];
+
+                        // Assuming animation-mixer component is properly attached to the entity
+                        if (targetEl.components[&apos;animation-mixer&apos;]) {
+                            console.log(&quot;Animation mixer exists!&quot;);
+                            targetEl.setAttribute(&apos;animation-mixer&apos;, `clip: ${clipName}; loop: repeat; crossFadeDuration: 0.4`);
+                            console.log(`Playing animation clip: ${clipName}`);
+                        } else {
+                            console.log(&quot;Animation mixer doesn&apos;t exist!&quot;);
+                        }
+                    }
+                });
+            }
+        });
+    }
+});
+AFRAME.registerComponent(&apos;click-listener&apos;, {
+    init: function () {
+        // Bind the onClick function to this component instance and listen for click events on the scene
+        this.onClick = this.onClick.bind(this);
+        this.el.sceneEl.addEventListener(&apos;click&apos;, this.onClick);
+        this.clipNames = [&apos;idle&apos;, &apos;hiphop&apos;, &apos;chicken&apos;, &apos;pockets&apos;];
+        this.currentClipIndex = 0;
+    },
+    remove: function () {
+        // Clean up by removing the event listener if the component is removed
+        this.el.sceneEl.removeEventListener(&apos;click&apos;, this.onClick);
+    },
+    onClick: function (evt) {
+        // Get the click position from the event
+        const clickPosition = { x: evt.clientX, y: evt.clientY };
+        this.castRay(clickPosition);
+    },
+    castRay: function (clickPosition) {
+        // Obtain the camera from the scene
+        const camera = this.el.sceneEl.camera;
+
+        // Convert the click position to normalized device coordinates (NDC)
+        const x = (clickPosition.x / window.innerWidth) * 2 - 1;
+        const y = -(clickPosition.y / window.innerHeight) * 2 + 1;
+
+        // Prepare a new THREE.Raycaster
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+
+        // Perform the raycast. This example checks against all objects in the scene; you might want to filter this
+        const intersects = raycaster.intersectObjects(this.el.sceneEl.object3D.children, true);
+
+        // Process intersections
+        if (intersects.length &gt; 0) {
+            // Log or handle the first intersected object
+            console.log(&quot;INTERSECTIONS&quot;);
+            console.log(intersects);
+            const firstIntersection = intersects[0].object.el; // Get the A-Frame element of the intersected object
+            if (firstIntersection.matches(&apos;#model-wrapper&apos;)) {
+                console.log(&apos;Intersected with the plane! &apos; + firstIntersection.getAttribute(&apos;name&apos;));
+                // Additional logic based on the intersection can be added here
+                firstIntersection.addEventListener(&apos;click&apos;, () =&gt; {
+                    const targetEl = firstIntersection.querySelector(&apos;[gltf-model]&apos;);
+                    if (targetEl) {
+                        // Use this.clipNames and this.currentClipIndex here
+                        this.currentClipIndex = (this.currentClipIndex + 1) % this.clipNames.length;
+                        const clipName = this.clipNames[this.currentClipIndex];
+
+                        // Assuming animation-mixer component is properly attached to the entity
+                        if (targetEl.components[&apos;animation-mixer&apos;]) {
+                            console.log(&quot;Animation mixer exists!&quot;);
+                            targetEl.setAttribute(&apos;animation-mixer&apos;, `clip: ${clipName}; loop: repeat; crossFadeDuration: 0.4`);
+                            console.log(`Playing animation clip: ${clipName}`);
+                        } else {
+                            console.log(&quot;Animation mixer doesn&apos;t exist!&quot;);
+                        }
+                    }
+                });
+            }
+        }
+    }
+});
+
+
+AFRAME.registerComponent(&apos;debug-raycaster&apos;, {
+    init: function () {
+        this.el.addEventListener(&apos;raycaster-intersected&apos;, evt =&gt; {
+            console.log(&apos;Raycaster has intersected:&apos;, evt.detail.el);
+        });
+        this.el.addEventListener(&apos;raycaster-intersected-cleared&apos;, evt =&gt; {
+            console.log(&apos;Raycaster intersection cleared:&apos;, evt.detail.el);
+        });
+    }
+});</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,1078 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/ar-camera-extra.js",
+    "content": "function generateLine(point1, point2) {\n    return { x1: point1.x, y1: point1.y, x2: point2.x, y2: point2.y };\n}\n\nfunction getPoints(line) {\n    return [{ x: line.x1, y: line.y1 }, { x: line.x2, y: line.y2 }];\n}\n\nfunction calcDistance(point1, point2) {\n    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2))\n}\n\nfunction calcSize(line) {\n    return Math.sqrt(Math.pow(line.x2 - line.x1, 2) + Math.pow(line.y2 - line.y1, 2))\n}\n\nfunction calcIntersection(line1, line2) {\n    var x = ((line1.x1 * line1.y2 - line1.y1 * line1.x2) * (line2.x1 - line2.x2) - (line1.x1 - line1.x2) * (line2.x1 * line2.y2 - line2.y1 * line2.x2)) / ((line1.x1 - line1.x2) * (line2.y1 - line2.y2) - (line1.y1 - line1.y2) * (line2.x1 - line2.x2));\n    var y = ((line1.x1 * line1.y2 - line1.y1 * line1.x2) * (line2.y1 - line2.y2) - (line1.y1 - line1.y2) * (line2.x1 * line2.y2 - line2.y1 * line2.x2)) / ((line1.x1 - line1.x2) * (line2.y1 - line2.y2) - (line1.y1 - line1.y2) * (line2.x1 - line2.x2));\n    return { x: x, y: y };\n}\n\nfunction calcMax(line1, line2) {\n    return (calcDistance({ x: line1.x1, y: line1.y1 }, { x: line1.x2, y: line1.y2 }) < calcDistance({ x: line2.x1, y: line2.y1 }, { x: line2.x2, y: line2.y2 })) ? line2 : line1;\n}\nfunction calcMin(line1, line2) {\n    return (calcDistance({ x: line1.x1, y: line1.y1 }, { x: line1.x2, y: line1.y2 }) >= calcDistance({ x: line2.x1, y: line2.y1 }, { x: line2.x2, y: line2.y2 })) ? line2 : line1;\n}\n\nfunction calcAngle(point1, point2) {\n    return Math.atan((point2.y - point1.y) / (point2.x - point1.x));\n}\n\nfunction calcPolygonArea(vertices) {\n    var total = 0;\n\n    for (var i = 0, l = vertices.length; i < l; i++) {\n        var addX = vertices[i].x;\n        var addY = vertices[i == vertices.length - 1 ? 0 : i + 1].y;\n        var subX = vertices[i == vertices.length - 1 ? 0 : i + 1].x;\n        var subY = vertices[i].y;\n\n        total += (addX * addY * 0.5);\n        total -= (subX * subY * 0.5);\n    }\n\n    return Math.abs(total);\n}",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/ar-camera-extra.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "function",
+    "name": "generateLine",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~generateLine",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "params": [
+      {
+        "name": "point1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "point2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"x1\": *, \"y1\": *, \"x2\": *, \"y2\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "function",
+    "name": "getPoints",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~getPoints",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "undefined[]"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "calcDistance",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcDistance",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [
+      {
+        "name": "point1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "point2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "calcSize",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcSize",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "calcIntersection",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcIntersection",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "line2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"x\": *, \"y\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "function",
+    "name": "calcMax",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcMax",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "line2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "function",
+    "name": "calcMin",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcMin",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "line2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "function",
+    "name": "calcAngle",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcAngle",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "params": [
+      {
+        "name": "point1",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "point2",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "function",
+    "name": "calcPolygonArea",
+    "memberof": "src/ar-camera-extra.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/ar-camera-extra.js~calcPolygonArea",
+    "access": "public",
+    "export": false,
+    "importPath": "mrinteractivemural.client/src/ar-camera-extra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "params": [
+      {
+        "name": "vertices",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "file",
+    "name": "src/ar-camera.js",
+    "content": "// Register AR component\nAFRAME.registerComponent('ar-camera', {\n    schema: { elid: { type: 'string' }, cameraid: { type: 'string' } },\n    init: function () {\n        window.ARcamera = {};\n\n        if (this.data.cameraid != '') {\n            window.ARcamera.camera = document.getElementById(this.data.cameraid);\n        } else {\n            window.ARcamera.camera = document.querySelector('a-camera');\n        }\n\n        window.ARcamera.video_component = this.el;\n        window.ARcamera.canvas = document.createElement('canvas');\n\n        window.ARcamera.el_obj = document.getElementById(this.data.elid);\n\n        window.ARcamera.detector = new AR.Detector();\n\n        window.ARcamera.size_real = 95;\n\n        window.ARcamera.timeDelta = 0;\n    },\n    update: function (oldData) {\n        if (oldData.elid !== this.data.elid) {\n            window.ARcamera.el_obj = document.getElementById(this.data.elid);\n        }\n        if (oldData.cameraid !== this.data.cameraid) {\n            if (this.data.cameraid != '') {\n                window.ARcamera.camera = document.getElementById(this.data.cameraid);\n            } else {\n                window.ARcamera.camera = document.querySelector('a-camera');\n            }\n        }\n    },\n    tick: function (time, timeDelta) {\n        window.ARcamera.timeDelta += timeDelta;\n        if (window.ARcamera.timeDelta < 60) {\n            return;\n        }\n        window.ARcamera.timeDelta = 0;\n        if (typeof window.ARcamera.video == 'undefined') {\n            if (window.ARcamera.video_component.getAttribute('src') != null) {\n                //TODO: can i detect the video id generated by a-video-billboard ?? I can generalize the component here\n                window.ARcamera.video = document.getElementById(window.ARcamera.video_component.getAttribute('src').substr(1));\n                window.ARcamera.canvas.width = window.ARcamera.video.videoWidth;\n                window.ARcamera.canvas.height = window.ARcamera.video.videoHeight;\n                window.ARcamera.context = window.ARcamera.canvas.getContext('2d');\n\n                window.ARcamera.view_width = window.ARcamera.video_component.getAttribute('width'),\n                    window.ARcamera.view_heigth = window.ARcamera.video_component.getAttribute('height');\n                window.ARcamera.view_depth = window.ARcamera.video_component.getAttribute('frustum-lock').depth;\n            }\n        } else {\n            window.ARcamera.context.drawImage(window.ARcamera.video, 0, 0, window.ARcamera.video.videoWidth, window.ARcamera.video.videoHeight);\n            var imageData = window.ARcamera.context.getImageData(0, 0, window.ARcamera.canvas.width, window.ARcamera.canvas.height);\n\n            var markers = window.ARcamera.detector.detect(imageData);\n\n            if (markers.length > 0) {\n                var points = markers[0].corners;\n\n                var position = calcIntersection(generateLine(points[0], points[2]), generateLine(points[1], points[3]));\n\n                // Marker \"only\" x rotated\n                if (Math.abs(calcAngle(points[0], points[1])) < Math.PI / 8 && Math.abs(calcAngle(points[2], points[3])) < Math.PI / 8) {\n                    line_near = calcMax(generateLine(points[0], points[1]), generateLine(points[2], points[3]));\n                    line_far = calcMin(generateLine(points[0], points[1]), generateLine(points[2], points[3]));\n                    line_side1 = generateLine(points[1], points[2]);\n                    line_side2 = generateLine(points[3], points[0]);\n                    // Marker \"only\" x rotated\n                } else if (Math.abs(calcAngle(points[1], points[2])) < Math.PI / 8 && Math.abs(calcAngle(points[3], points[0])) < Math.PI / 8) {\n                    line_near = calcMax(generateLine(points[1], points[2]), generateLine(points[3], points[0]));\n                    line_far = calcMin(generateLine(points[1], points[2]), generateLine(points[3], points[0]));\n                    line_side1 = generateLine(points[0], points[1]);\n                    line_side2 = generateLine(points[2], points[3]);\n                } else { // TODO: other cases. e: \n                    line_near = generateLine(points[1], points[2]);\n                    line_far = generateLine(points[3], points[0]);\n                    line_side1 = generateLine(points[0], points[1]);\n                    line_side2 = generateLine(points[2], points[3]);\n                }\n                line_final = line_near;// TODO: parallel line_near in point position insersect with line_side1,line_side2\n\n                line_far_size = calcSize(line_far);\n                line_near_size = calcSize(line_near);\n                line_final_size = calcSize(line_final);\n                x_final = (position.x * window.ARcamera.view_width / window.ARcamera.canvas.width) - window.ARcamera.view_width * .5;\n                y_final = (position.y * window.ARcamera.view_heigth / window.ARcamera.canvas.height) - window.ARcamera.view_heigth * .5;\n                z_final = window.ARcamera.size_real / line_final_size;\n\n                // Distance correction\n                ly_final = Math.atan(y_final / window.ARcamera.view_depth);\n                y_final = z_final * Math.tan(ly_final);\n\n                lx_final = Math.atan(x_final / window.ARcamera.view_depth);\n                x_final = z_final * Math.tan(lx_final);\n\n\n                /*\n                lx_rota_size = calcDistance(getPoints(line_near)[0],getPoints(line_far)[0]);\n                lx_rotb_size = (line_near_size-line_far_size)/2;\n                lx_rot = Math.asin(lx_rotb_size/lx_rota_size);\n                x_rot = 20*180*lx_rot/Math.PI;\n                */\n                /*\n                x_rota_size = (window.ARcamera.size_real/line_far_size) - (window.ARcamera.size_real/line_near_size);\n                x_rotb_size = 0.04;\n                lx_rot = Math.acos(x_rota_size/x_rotb_size);\n                x_rot = 180*lx_rot/Math.PI;\n                */\n                z_rot = 180 * calcAngle(getPoints(line_final)[0], getPoints(line_final)[1]) / Math.PI;\n\n\n                var pos_cam = window.ARcamera.camera.getAttribute('position');\n                var rot_cam = window.ARcamera.camera.getAttribute('rotation');\n\n                // Set position and rotation values\n                var pos = window.ARcamera.el_obj.getAttribute('position');\n                var rot = window.ARcamera.el_obj.getAttribute('rotation');\n                pos.x = pos_cam.x - x_final;\n                pos.y = pos_cam.y - y_final;\n                pos.z = pos_cam.z - z_final;\n\n                //rot.x = -x_rot;\n                //rot.y = -y_rot;\n                rot.z = z_rot;\n\n\n                window.ARcamera.el_obj.setAttribute('position', pos);\n                window.ARcamera.el_obj.setAttribute('rotation', rot);\n            }\n        }\n    }\n});",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/ar-camera.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 59,
+    "kind": "file",
+    "name": "src/AR.js",
+    "content": "/**\r\n * A custom React hook that manages the state and behavior for the AR component.\r\n * This module contains the logic part of the AR system, separated from the React components.\r\n * \r\n * \r\n * @module ARLogic\r\n */\r\n\r\nimport { useState } from 'react';\r\n\r\n/**\r\n * Hook that manages the AR scene's state and interactions.\r\n * \r\n * @returns {Object} The visibility state of the AR scene, and functions to toggle this state and handle button clicks for model swapping.\r\n */\r\nexport const AR = () => {\r\n    const [isSceneVisible, setIsSceneVisible] = useState(true);\r\n\r\n    /**\r\n     * Toggles the visibility state of the AR scene.\r\n     */\r\n    const toggleSceneVisibility = () => {\r\n        setIsSceneVisible((prevState) => !prevState);\r\n    };\r\n\r\n    /**\r\n     * Fetches and loads the model based on the provided model ID.\r\n     * It demonstrates fetching model data from an API and updating the scene accordingly.\r\n     * \r\n     * @param {Number} modelID - The ID of the model to load.\r\n     */\r\n    const handleSwapButtonClick = () => {\r\n        loadModel(1);\r\n    };\r\n\r\n    function loadModel(modelID) {\r\n        const apiUrl = `https://localhost:7121/models/${modelID}`;\r\n        fetch(apiUrl)\r\n            .then((response) => response.json())\r\n            .then((data) => {\r\n                console.log(data);\r\n                const modelEntity = document.getElementById('dynamic-model');\r\n                modelEntity.setAttribute('gltf-model', \"http://localhost:8000/robot.glb\");\r\n            })\r\n            .catch((error) => console.error('Error loading the model:', error));\r\n    }\r\n\r\n    return { isSceneVisible, toggleSceneVisibility, handleSwapButtonClick };\r\n};\r\n",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/AR.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 60,
+    "kind": "function",
+    "name": "AR",
+    "memberof": "src/AR.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/AR.js~AR",
+    "access": "public",
+    "export": true,
+    "importPath": "mrinteractivemural.client/src/AR.js",
+    "importStyle": "{AR}",
+    "description": "Hook that manages the AR scene's state and interactions.",
+    "lineNumber": 16,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} The visibility state of the AR scene, and functions to toggle this state and handle button clicks for model swapping."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "The visibility state of the AR scene, and functions to toggle this state and handle button clicks for model swapping."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 61,
+    "kind": "file",
+    "name": "src/assets/UIPanel.js",
+    "content": "console.log(\"Hello World!\")",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/assets/UIPanel.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 62,
+    "kind": "file",
+    "name": "src/Drawer.js",
+    "content": "/**\r\n * @file This file defines the Drawer hook used for toggling the visibility of a UI drawer.\r\n */\r\n\r\nimport { useState } from 'react';\r\n\r\n/**\r\n * A custom React hook to manage the state of a drawer component.\r\n * It provides functionality to toggle the open/close state of the drawer.\r\n * \r\n * @returns {{isDrawerOpen: boolean, toggleDrawer: Function}} An object containing:\r\n * - `isDrawerOpen`: A boolean state indicating whether the drawer is open.\r\n * - `toggleDrawer`: A function that toggles the state of `isDrawerOpen`.\r\n */\r\nexport const Drawer = () => {\r\n    // State to keep track of the drawer's open/close status.\r\n    const [isDrawerOpen, setIsDrawerOpen] = useState(false);\r\n\r\n    /**\r\n     * Toggles the open/close state of the drawer.\r\n     */\r\n    const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);\r\n\r\n    // Exposing the state and the toggler function for external use.\r\n    return { isDrawerOpen, toggleDrawer };\r\n};\r\n",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/Drawer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 63,
+    "kind": "function",
+    "name": "Drawer",
+    "memberof": "src/Drawer.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Drawer.js~Drawer",
+    "access": "public",
+    "export": true,
+    "importPath": "mrinteractivemural.client/src/Drawer.js",
+    "importStyle": "{Drawer}",
+    "description": "A custom React hook to manage the state of a drawer component.\nIt provides functionality to toggle the open/close state of the drawer.",
+    "lineNumber": 15,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{{isDrawerOpen: boolean, toggleDrawer: Function}} An object containing:\n- `isDrawerOpen`: A boolean state indicating whether the drawer is open.\n- `toggleDrawer`: A function that toggles the state of `isDrawerOpen`."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "{isDrawerOpen: boolean, toggleDrawer: Function}"
+      ],
+      "spread": false,
+      "description": "An object containing:\n- `isDrawerOpen`: A boolean state indicating whether the drawer is open.\n- `toggleDrawer`: A function that toggles the state of `isDrawerOpen`."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 64,
+    "kind": "file",
+    "name": "src/events.js",
+    "content": "AFRAME.registerComponent('markerhandler', {\n    init: function () {\n        // Initialize clipNames here instead of in the schema to ensure it's always defined.\n        this.clipNames = ['idle', 'hiphop', 'chicken', 'pockets'];\n        this.currentClipIndex = 0;\n\n        this.el.addEventListener('model-loaded', () => {\n            const planeEl = this.el.querySelector('#model-wrapper');\n            if (planeEl) {\n                planeEl.addEventListener('click', () => {\n                    const targetEl = planeEl.querySelector('[gltf-model]');\n                    if (targetEl) {\n                        // Use this.clipNames and this.currentClipIndex here\n                        this.currentClipIndex = (this.currentClipIndex + 1) % this.clipNames.length;\n                        const clipName = this.clipNames[this.currentClipIndex];\n\n                        // Assuming animation-mixer component is properly attached to the entity\n                        if (targetEl.components['animation-mixer']) {\n                            console.log(\"Animation mixer exists!\");\n                            targetEl.setAttribute('animation-mixer', `clip: ${clipName}; loop: repeat; crossFadeDuration: 0.4`);\n                            console.log(`Playing animation clip: ${clipName}`);\n                        } else {\n                            console.log(\"Animation mixer doesn't exist!\");\n                        }\n                    }\n                });\n            }\n        });\n    }\n});\nAFRAME.registerComponent('click-listener', {\n    init: function () {\n        // Bind the onClick function to this component instance and listen for click events on the scene\n        this.onClick = this.onClick.bind(this);\n        this.el.sceneEl.addEventListener('click', this.onClick);\n        this.clipNames = ['idle', 'hiphop', 'chicken', 'pockets'];\n        this.currentClipIndex = 0;\n    },\n    remove: function () {\n        // Clean up by removing the event listener if the component is removed\n        this.el.sceneEl.removeEventListener('click', this.onClick);\n    },\n    onClick: function (evt) {\n        // Get the click position from the event\n        const clickPosition = { x: evt.clientX, y: evt.clientY };\n        this.castRay(clickPosition);\n    },\n    castRay: function (clickPosition) {\n        // Obtain the camera from the scene\n        const camera = this.el.sceneEl.camera;\n\n        // Convert the click position to normalized device coordinates (NDC)\n        const x = (clickPosition.x / window.innerWidth) * 2 - 1;\n        const y = -(clickPosition.y / window.innerHeight) * 2 + 1;\n\n        // Prepare a new THREE.Raycaster\n        const raycaster = new THREE.Raycaster();\n        raycaster.setFromCamera(new THREE.Vector2(x, y), camera);\n\n        // Perform the raycast. This example checks against all objects in the scene; you might want to filter this\n        const intersects = raycaster.intersectObjects(this.el.sceneEl.object3D.children, true);\n\n        // Process intersections\n        if (intersects.length > 0) {\n            // Log or handle the first intersected object\n            console.log(\"INTERSECTIONS\");\n            console.log(intersects);\n            const firstIntersection = intersects[0].object.el; // Get the A-Frame element of the intersected object\n            if (firstIntersection.matches('#model-wrapper')) {\n                console.log('Intersected with the plane! ' + firstIntersection.getAttribute('name'));\n                // Additional logic based on the intersection can be added here\n                firstIntersection.addEventListener('click', () => {\n                    const targetEl = firstIntersection.querySelector('[gltf-model]');\n                    if (targetEl) {\n                        // Use this.clipNames and this.currentClipIndex here\n                        this.currentClipIndex = (this.currentClipIndex + 1) % this.clipNames.length;\n                        const clipName = this.clipNames[this.currentClipIndex];\n\n                        // Assuming animation-mixer component is properly attached to the entity\n                        if (targetEl.components['animation-mixer']) {\n                            console.log(\"Animation mixer exists!\");\n                            targetEl.setAttribute('animation-mixer', `clip: ${clipName}; loop: repeat; crossFadeDuration: 0.4`);\n                            console.log(`Playing animation clip: ${clipName}`);\n                        } else {\n                            console.log(\"Animation mixer doesn't exist!\");\n                        }\n                    }\n                });\n            }\n        }\n    }\n});\n\n\nAFRAME.registerComponent('debug-raycaster', {\n    init: function () {\n        this.el.addEventListener('raycaster-intersected', evt => {\n            console.log('Raycaster has intersected:', evt.detail.el);\n        });\n        this.el.addEventListener('raycaster-intersected-cleared', evt => {\n            console.log('Raycaster intersection cleared:', evt.detail.el);\n        });\n    }\n});",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/events.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "src/gestures.js",
+    "content": "/* global AFRAME */\n\nAFRAME.registerComponent(\"gesture-handler\", {\n    schema: {\n        enabled: { default: true },\n        rotationFactor: { default: 5 },\n        minScale: { default: 0.3 },\n        maxScale: { default: 8 },\n    },\n\n    init: function () {\n        this.handleScale = this.handleScale.bind(this);\n        this.handleRotation = this.handleRotation.bind(this);\n\n        this.isVisible = false;\n        this.initialScale = this.el.object3D.scale.clone();\n        this.scaleFactor = 1;\n\n        this.el.sceneEl.addEventListener(\"markerFound\", (e) => {\n            this.isVisible = true;\n        });\n\n        this.el.sceneEl.addEventListener(\"markerLost\", (e) => {\n            this.isVisible = false;\n        });\n    },\n\n    update: function () {\n        if (this.data.enabled) {\n            this.el.sceneEl.addEventListener(\"onefingermove\", this.handleRotation);\n            this.el.sceneEl.addEventListener(\"twofingermove\", this.handleScale);\n        } else {\n            this.el.sceneEl.removeEventListener(\"onefingermove\", this.handleRotation);\n            this.el.sceneEl.removeEventListener(\"twofingermove\", this.handleScale);\n        }\n    },\n\n    remove: function () {\n        this.el.sceneEl.removeEventListener(\"onefingermove\", this.handleRotation);\n        this.el.sceneEl.removeEventListener(\"twofingermove\", this.handleScale);\n    },\n\n    handleRotation: function (event) {\n        if (this.isVisible) {\n            this.el.object3D.rotation.y +=\n                event.detail.positionChange.x * this.data.rotationFactor;\n            this.el.object3D.rotation.x +=\n                event.detail.positionChange.y * this.data.rotationFactor;\n        }\n    },\n\n    handleScale: function (event) {\n        if (this.isVisible) {\n            this.scaleFactor *=\n                1 + event.detail.spreadChange / event.detail.startSpread;\n\n            this.scaleFactor = Math.min(\n                Math.max(this.scaleFactor, this.data.minScale),\n                this.data.maxScale\n            );\n\n            this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;\n            this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;\n            this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;\n        }\n    },\n});\n\n// Component that detects and emits events for touch gestures\n\nAFRAME.registerComponent(\"gesture-detector\", {\n    schema: {\n        element: { default: \"\" }\n    },\n\n    init: function () {\n        this.targetElement =\n            this.data.element && document.querySelector(this.data.element);\n\n        if (!this.targetElement) {\n            this.targetElement = this.el;\n        }\n\n        this.internalState = {\n            previousState: null\n        };\n\n        this.emitGestureEvent = this.emitGestureEvent.bind(this);\n\n        this.targetElement.addEventListener(\"touchstart\", this.emitGestureEvent);\n\n        this.targetElement.addEventListener(\"touchend\", this.emitGestureEvent);\n\n        this.targetElement.addEventListener(\"touchmove\", this.emitGestureEvent);\n    },\n\n    remove: function () {\n        this.targetElement.removeEventListener(\"touchstart\", this.emitGestureEvent);\n\n        this.targetElement.removeEventListener(\"touchend\", this.emitGestureEvent);\n\n        this.targetElement.removeEventListener(\"touchmove\", this.emitGestureEvent);\n    },\n\n    emitGestureEvent(event) {\n        const currentState = this.getTouchState(event);\n\n        const previousState = this.internalState.previousState;\n\n        const gestureContinues =\n            previousState &&\n            currentState &&\n            currentState.touchCount == previousState.touchCount;\n\n        const gestureEnded = previousState && !gestureContinues;\n\n        const gestureStarted = currentState && !gestureContinues;\n\n        if (gestureEnded) {\n            const eventName =\n                this.getEventPrefix(previousState.touchCount) + \"fingerend\";\n\n            this.el.emit(eventName, previousState);\n\n            this.internalState.previousState = null;\n        }\n\n        if (gestureStarted) {\n            currentState.startTime = performance.now();\n\n            currentState.startPosition = currentState.position;\n\n            currentState.startSpread = currentState.spread;\n\n            const eventName =\n                this.getEventPrefix(currentState.touchCount) + \"fingerstart\";\n\n            this.el.emit(eventName, currentState);\n\n            this.internalState.previousState = currentState;\n        }\n\n        if (gestureContinues) {\n            const eventDetail = {\n                positionChange: {\n                    x: currentState.position.x - previousState.position.x,\n\n                    y: currentState.position.y - previousState.position.y\n                }\n            };\n\n            if (currentState.spread) {\n                eventDetail.spreadChange = currentState.spread - previousState.spread;\n            }\n\n            // Update state with new data\n\n            Object.assign(previousState, currentState);\n\n            // Add state data to event detail\n\n            Object.assign(eventDetail, previousState);\n\n            const eventName =\n                this.getEventPrefix(currentState.touchCount) + \"fingermove\";\n\n            this.el.emit(eventName, eventDetail);\n        }\n    },\n\n    getTouchState: function (event) {\n        if (event.touches.length === 0) {\n            return null;\n        }\n\n        // Convert event.touches to an array so we can use reduce\n\n        const touchList = [];\n\n        for (let i = 0; i < event.touches.length; i++) {\n            touchList.push(event.touches[i]);\n        }\n\n        const touchState = {\n            touchCount: touchList.length\n        };\n\n        // Calculate center of all current touches\n\n        const centerPositionRawX =\n            touchList.reduce((sum, touch) => sum + touch.clientX, 0) /\n            touchList.length;\n\n        const centerPositionRawY =\n            touchList.reduce((sum, touch) => sum + touch.clientY, 0) /\n            touchList.length;\n\n        touchState.positionRaw = { x: centerPositionRawX, y: centerPositionRawY };\n\n        // Scale touch position and spread by average of window dimensions\n\n        const screenScale = 2 / (window.innerWidth + window.innerHeight);\n\n        touchState.position = {\n            x: centerPositionRawX * screenScale,\n            y: centerPositionRawY * screenScale\n        };\n\n        // Calculate average spread of touches from the center point\n\n        if (touchList.length >= 2) {\n            const spread =\n                touchList.reduce((sum, touch) => {\n                    return (\n                        sum +\n                        Math.sqrt(\n                            Math.pow(centerPositionRawX - touch.clientX, 2) +\n                            Math.pow(centerPositionRawY - touch.clientY, 2)\n                        )\n                    );\n                }, 0) / touchList.length;\n\n            touchState.spread = spread * screenScale;\n        }\n\n        return touchState;\n    },\n\n    getEventPrefix(touchCount) {\n        const numberNames = [\"one\", \"two\", \"three\", \"many\"];\n\n        return numberNames[Math.min(touchCount, 4) - 1];\n    }\n});",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/gestures.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 66,
+    "kind": "file",
+    "name": "src/Home.js",
+    "content": "import { useCallback, useState, useEffect } from 'react';\r\nimport { Drawer } from './Drawer';\r\n\r\n/**\r\n * A custom React hook that manages the state and behavior for the Home component.\r\n * It handles navigation, interaction, and the background effects.\r\n * \r\n * @returns {Object} The state values and functions neccessary to interface with {@link HomeComponent}.\r\n */\r\nexport const Home = () => {\r\n    /**\r\n     * State to manage the state of the drawer component.\r\n     */\r\n    const { isDrawerOpen, toggleDrawer } = Drawer();\r\n\r\n    /**\r\n     * State to manage the viewport size for background effects.\r\n     */\r\n    const [viewportSize, setViewportSize] = useState({\r\n        width: window.innerWidth,\r\n        height: window.innerHeight,\r\n    });\r\n\r\n    /**\r\n     * A memoized callback that calculates the number of squares based on the current viewport size.\r\n     * It divides the viewport into a grid of squares, each with a side length defined by `squareSize`.\r\n     * \r\n     * @returns {Array<Object>} An array of objects where each object represents a unique square with a random color.\r\n     */\r\n    const calculateSquares = useCallback(() => {\r\n        const squareSize = 20;\r\n        const widthSquares = Math.floor(window.innerWidth / squareSize);\r\n        const heightSquares = Math.floor(window.innerHeight / squareSize);\r\n        const numSquares = widthSquares * heightSquares;\r\n\r\n        return Array.from({ length: numSquares }, (_, i) => ({\r\n            id: i,\r\n            color: `hsl(${Math.random() * 360}, 100%, 50%)`,\r\n        }));\r\n    }, []);\r\n\r\n    /**\r\n     * An effect that listens for window resize events to update the `viewportSize` state,\r\n     * ensuring that the grid of squares is recalculated and rendered correctly for the new viewport size.\r\n     */\r\n    useEffect(() => {\r\n        const handleResize = () => {\r\n            setViewportSize({\r\n                width: window.innerWidth,\r\n                height: window.innerHeight,\r\n            });\r\n        };\r\n\r\n        window.addEventListener('resize', handleResize);\r\n\r\n        return () => window.removeEventListener('resize', handleResize);\r\n    }, []);\r\n\r\n    /**\r\n     * State to store the calculated squares. It is initially populated by calling `calculateSquares`.\r\n     */\r\n    const [squares, setSquares] = useState(calculateSquares());\r\n\r\n    /**\r\n     * An effect that recalculates the squares any time the viewport size changes.\r\n     */\r\n    useEffect(() => {\r\n        setSquares(calculateSquares());\r\n    }, [viewportSize, calculateSquares]);\r\n\r\n    /**\r\n     * An effect that periodically updates the color of each square to create a dynamic, animated pattern.\r\n     * It uses a 1-second interval to randomly assign new colors to all squares.\r\n     */\r\n    useEffect(() => {\r\n        const intervalId = setInterval(() => {\r\n            setSquares((squares) =>\r\n                squares.map((square) => ({\r\n                    ...square,\r\n                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,\r\n                }))\r\n            );\r\n        }, 1000);\r\n\r\n        return () => clearInterval(intervalId);\r\n    }, [calculateSquares]);\r\n\r\n    return { squares, isDrawerOpen, toggleDrawer };\r\n};\r\n",
+    "static": true,
+    "longname": "C:/Users/Ahmed/Playground/MRInteractiveWall 3-7/mrinteractivemural.client/src/Home.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 67,
+    "kind": "function",
+    "name": "Home",
+    "memberof": "src/Home.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Home.js~Home",
+    "access": "public",
+    "export": true,
+    "importPath": "mrinteractivemural.client/src/Home.js",
+    "importStyle": "{Home}",
+    "description": "A custom React hook that manages the state and behavior for the Home component.\nIt handles navigation, interaction, and the background effects.",
+    "lineNumber": 10,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} The state values and functions neccessary to interface with {@link HomeComponent}."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "The state values and functions neccessary to interface with {@link HomeComponent}."
+    },
+    "params": []
+  },
+  {
+    "kind": "index",
+    "content": "# React + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two official plugins are available:\n\n- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh\n- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh\n",
+    "longname": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\mrinteractivemural.client\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"mrinteractivemural.client\",\n  \"private\": true,\n  \"version\": \"0.0.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"lint\": \"eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0\",\n    \"preview\": \"vite preview\"\n  },\n  \"dependencies\": {\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"ra-data-simple-rest\": \"^4.16.11\",\n    \"react\": \"^18.2.0\",\n    \"react-admin\": \"^4.16.12\",\n    \"react-dom\": \"^18.2.0\",\n    \"react-router-dom\": \"^6.22.0\"\n  },\n  \"devDependencies\": {\n    \"@types/react\": \"^18.2.43\",\n    \"@types/react-dom\": \"^18.2.17\",\n    \"@vitejs/plugin-react\": \"^4.2.1\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^8.55.0\",\n    \"eslint-plugin-react\": \"^7.33.2\",\n    \"eslint-plugin-react-hooks\": \"^4.6.0\",\n    \"eslint-plugin-react-refresh\": \"^0.4.5\",\n    \"vite\": \"^5.0.8\"\n  }\n}\n",
+    "longname": "C:\\Users\\Ahmed\\Playground\\MRInteractiveWall 3-7\\mrinteractivemural.client\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

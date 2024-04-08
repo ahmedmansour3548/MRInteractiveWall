@@ -1,0 +1,37 @@
+{
+  "coverage": "25%",
+  "expectCount": 12,
+  "actualCount": 3,
+  "files": {
+    "src/ar-camera-extra.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        23,
+        26,
+        30,
+        34
+      ]
+    },
+    "src/AR.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/Drawer.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/Home.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    }
+  }
+}
