@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 import AR from './AR';
+import Admin from './Admin';
 
 const App = () => {
     return (
@@ -7,6 +8,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="ar" element={<AR />} />
+            <Route path="admin" element={<Admin />} />
             <Route path="*" element={<p>There is nothing here: 404!</p>} />
 
         </Routes>
@@ -46,10 +48,13 @@ const App = () => {
 const Home = () => {
     return (
         <div className="home-container" style={{ fontSize: '50px', marginLeft: '800px' }}>
-            <h2 className="home-title">Home</h2>
+            <h2 className="home-title">Home!</h2>
             <nav>
                 <NavLink className="nav-link" to="/ar" style={{ color: 'teal', marginLeft: '80px' }} >
                     AR
+                </NavLink>
+                <NavLink className="nav-link" to="/admin" style={{ color: 'teal', marginLeft: '80px' }} >
+                    Admin
                 </NavLink>
             </nav>
         </div>

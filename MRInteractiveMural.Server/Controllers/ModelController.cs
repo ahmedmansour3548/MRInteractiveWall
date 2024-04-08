@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MRInteractiveMural.Server.Models;
 using MySqlConnector;
+using System;
+using System.Text.Json;
 
 namespace MRInteractiveMural.Server.Controllers
 {
@@ -15,7 +17,7 @@ namespace MRInteractiveMural.Server.Controllers
             List<ArtModels> models = new List<ArtModels>();
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
             connection.Open();
-            using var command = new MySqlCommand("SELECT id, modelName, labMemberName, modelFilePath, modelFolderPath from models order by id", connection);
+            using var command = new MySqlCommand("SELECT id, modelName, labMemberID, modelFilePath, fileName from models order by id", connection);
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
@@ -23,9 +25,9 @@ namespace MRInteractiveMural.Server.Controllers
                 {
                     id = (int)reader["id"],
                     modelName = reader["modelName"].ToString() ?? "",
-                    labMemberName = reader["labMemberName"].ToString() ?? "",
+                    labMemberID = (int)reader["labMemberID"],
                     modelFilePath = reader["modelFilePath"].ToString() ?? "",
-                    modelFolderPath = reader["modelFolderPath"].ToString() ?? ""
+                    fileName = reader["fileName"].ToString() ?? ""
                 });
             }
             Response.Headers.Append("X-Total-Count", models.Count().ToString());
@@ -42,7 +44,7 @@ namespace MRInteractiveMural.Server.Controllers
             ArtModels model = new ArtModels();
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
             connection.Open();
-            string query = $"SELECT id, modelName, labMemberName, modelFilePath, modelFolderPath from models where id = {id}";
+            string query = $"SELECT id, modelName, labMemberID, modelFilePath, fileName from models where id = {id}";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -51,9 +53,9 @@ namespace MRInteractiveMural.Server.Controllers
                 {
                     id = (int)reader["id"],
                     modelName = reader["modelName"].ToString() ?? "",
-                    labMemberName = reader["labMemberName"].ToString() ?? "",
+                    labMemberID = (int)reader["labMemberID"],
                     modelFilePath = reader["modelFilePath"].ToString() ?? "",
-                    modelFolderPath = reader["modelFolderPath"].ToString() ?? "",
+                    fileName = reader["fileName"].ToString() ?? "",
                 };
             }
 
@@ -64,16 +66,24 @@ namespace MRInteractiveMural.Server.Controllers
         [HttpPost("models")]
         public ArtModels AddModel(ArtModels model)
         {
+            String jsonString = model.fileImport.ToString();
+            JsonDocument doc = JsonDocument.Parse(jsonString);
+            JsonElement rawFile = doc.RootElement.GetProperty("rawFile");
+            doc = JsonDocument.Parse(rawFile.ToString());
+            JsonElement fileName = doc.RootElement.GetProperty("path");
+
+            // Get the string value
+            //string name = fileName.GetString();
 
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
-            string query = @"INSERT INTO models (id, modelName, labMemberName, modelFilePath, modelFolderPath) values (@id, @modelName, @labMemberName, @modelFilePath, @modelFolderPath)";
+            string query = @"INSERT INTO models (id, modelName, labMemberID, modelFilePath, fileName) values (@id, @modelName, @labMemberID, @modelFilePath, @fileName)";
             using var command = new MySqlCommand(query, connection);
             command.CommandText = query;
             command.Parameters.AddWithValue("@id", (int)model.id);
             command.Parameters.AddWithValue("@modelName", model.modelName);
-            command.Parameters.AddWithValue("@labMemberName", model.labMemberName);
+            command.Parameters.AddWithValue("@labMemberID", model.labMemberID);
             command.Parameters.AddWithValue("@modelFilePath", model.modelFilePath);
-            command.Parameters.AddWithValue("@modelFolderPath", model.modelFolderPath);
+            command.Parameters.AddWithValue("@fileName", fileName.GetString());
             connection.Open();
             command.ExecuteNonQuery();
 
@@ -85,13 +95,13 @@ namespace MRInteractiveMural.Server.Controllers
         public ArtModels UpdateModel(ArtModels model)
         {
             using var connection = new MySqlConnection(ApplicationSettings.RepositoryConnectionString);
-            string query = $"UPDATE models SET modelName = @modelName, labMemberName = @labMemberName, modelFilePath = @modelFilePath, modelFolderPath = @modelFolderPath WHERE id = {model.id}";
+            string query = $"UPDATE models SET modelName = @modelName, labMemberID = @labMemberID, modelFilePath = @modelFilePath, fileName = @fileName WHERE id = {model.id}";
             using var command = new MySqlCommand(query, connection);
             command.CommandText = query;
             command.Parameters.AddWithValue("@modelName", model.modelName);
-            command.Parameters.AddWithValue("@labMemberName", model.labMemberName);
+            command.Parameters.AddWithValue("@labMemberID", model.labMemberID);
             command.Parameters.AddWithValue("@modelFilePath", model.modelFilePath);
-            command.Parameters.AddWithValue("@modelFolderPath", model.modelFolderPath);
+            command.Parameters.AddWithValue("@fileName", model.fileName);
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
