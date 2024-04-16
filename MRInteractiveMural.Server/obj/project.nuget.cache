@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "vDRUY/Z6126/QyZMXpA9jxKVq9KlSmQME8M7TyM6UwtNi+0eP9wXQlW7BToBDDy7zrOTU3pXPCdY1EY9bJrT3w==",
+  "dgSpecHash": "Jz5mgI0AgbRBp0udkRsNTsg4m5YIjBGYpilJvdc3XTV2y0G7umzVztXJ5JVUIcOsZgB3zRlVCwYAmbp29tKTVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ahmed\\Playground\\MRIW\\MRInteractiveMural.Server\\MRInteractiveMural.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmed\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.3\\microsoft.aspnetcore.spaproxy.8.0.3.nupkg.sha512",
+    "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.4\\microsoft.aspnetcore.spaproxy.8.0.4.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.2\\microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.2\\microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.2\\microsoft.entityframeworkcore.analyzers.8.0.2.nupkg.sha512",

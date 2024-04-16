@@ -55,6 +55,7 @@ function AdminComponent() {
 
     const handleAddModel = async () => {
         try {
+            console.log(newModel);
             await axios.post('https://localhost:7121/api/models', newModel);
             setNewModel({ modelName: '', labMemberID: '', modelFilePath: '', modelFileName: '' });
             setShowNewModelForm(false);
@@ -73,19 +74,7 @@ function AdminComponent() {
         const updatedModel = {
             ...editedModel, // Spread existing fields
             id: modelId, // Ensure correct ID is used, assuming `editedModel` does not store it
-            fileImport: {
-                options: { propertyNameCaseInsensitive: true },
-                parent: {
-                    options: { propertyNameCaseInsensitive: true },
-                    parent: "someValue", // You need to define how these values are set or updated
-                    root: "someValue"
-                },
-                root: {
-                    options: { propertyNameCaseInsensitive: true },
-                    parent: "someValue",
-                    root: "someValue"
-                }
-            }
+            
         };
 
         try {

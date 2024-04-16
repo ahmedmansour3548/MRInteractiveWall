@@ -4,7 +4,9 @@ import './AR.css';
 
 
 /**
- * this is MyClass.
+ * The main AR component, responsible for displaying the AR content using AR.JS
+ * 
+ * @returns the page HTML
  */
 const ARComponent = () => {
 
@@ -26,53 +28,44 @@ const ARComponent = () => {
 
             {isSceneVisible && (
                 <a-scene gesture-detector arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5; debugUIEnabled: true;' click-listener>
+                    <a-marker type="pattern" preset="hiro" id="interactable-marker">
+                        <a-entity data-raycastable gltf-model={modelPath}
+                            position="0 0 0.5"
+                            scale="0.2 0.2 0.2"
+                            animation-mixer="clip: idle; loop: repeat">
+                        </a-entity>
+                    </a-marker>
                     <a-marker type="pattern" preset="custom" url="/src/assets/numbers/001.patt" id="interactable-marker">
-                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="robot" position="0 0 0" scale="3 3 3"
-                            material="opacity: 1" debug-raycaster>
-                            <a-entity data-raycastable gltf-model={modelPath}
-                                position="0 0 0.5"
-                                scale="0.2 0.2 0.2"
-                                animation-mixer="clip: idle; loop: repeat">
-                            </a-entity>
-                            <a-text value={`Model ID: ${currentModelId}`} position="0 1 0" align="center"></a-text>
-                        </a-plane>
+                        <a-box id="button" name="1" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
+                        <a-plane id="plane" name="1" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
                     </a-marker>
                     <a-marker type="pattern" preset="custom" url="/src/assets/numbers/002.patt" id="interactable-marker">
-                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="triangle" position="0 0 0" scale="3 3 3"
-                            material="opacity: 1;" debug-raycaster>
-                            <a-entity id="dynamic-model" data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
-                                position="0 0 0.1"
-                                scale="0.2 0.2 0.2"
-                                animation-mixer="clip: animation0; loop: repeat">
-                            </a-entity>
-                        </a-plane>
+                        <a-box id="button" name="2" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
+                        <a-plane id="plane" name="2" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
                     </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/003.patt" id="interactable-marker">
-                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="bluebox" position="0 0 0" scale="3 3 3"
-                            material="opacity: 1;" debug-raycaster>
-                            <a-box id="animated-model"  data-raycastable position='0 0 0.2' scale='0.1 0.1 0.1' material='color: blue; opacity: 0.8;'
-                                animation="property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear">
-                            </a-box>
-                        </a-plane>
+                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/003.patt" id="3">
+                        <a-box id="button" name="3"  data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;'/>
+                        <a-plane id="plane" name="3" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true"/>
                     </a-marker>
-                    <a-marker type="barcode" value="3" id="interactable-marker">
-                        <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="redbox" position="0 0 0" scale="3 3 3"
-                            material="opacity: 1;" debug-raycaster>
+                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/003.patt" id="4">
+                        <a-box id="button" name="4" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
+                        <a-plane id="plane" name="4" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
+                    </a-marker>
+                    {/*<a-marker type="barcode" value="3" id="interactable-marker">
                             <a-box id="animated-model" name="redbox" data-raycastable class="interactive-entity" position='0 0 0.2' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
                                 animation="property: scale; to: 0.3 0.3 0.3; dir: alternate; dur: 2000; easing: easeInOutQuad; loop: true">
                             </a-box>
-                        </a-plane>
                     </a-marker>
-                    {/*</a-entity>
+                    </a-entity>
                         <a-entity id="animated-model" name="triangle" data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
                         position="-0.5 1 1"
                         scale="0.2 0.2 0.2"
                             animation-mixer="clip: *; loop: repeat; timeScale: 1;">
-                            
+
                         </a-entity>
                         <a-plane id="animated-model" data-raycastable name="triangleinvisible" position="-0.5 1 1" scale="1 1 1"
                             material="opacity: 0.5; transparent: true"
-           
+
                         ></a-plane>
                         <a-entity id="animated-model" name="robot" data-raycastable gltf-model="/src/assets/robot/robot.glb"
                         position="-0.5 0.5 1"

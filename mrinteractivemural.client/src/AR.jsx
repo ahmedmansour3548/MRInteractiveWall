@@ -52,7 +52,7 @@ const AR = () => {
 
             {isSceneVisible && (
                 <a-scene gesture-detector arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5; debugUIEnabled: true;' click-listener>
-                    <a-marker type="barcode" value="0" id="interactable-marker">
+                    <a-marker type="pattern" preset="custom" url="assets/numbers/pattern-marker.patt" id="interactable-marker">
                         <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="robot" position="0 0 0" scale="3 3 3"
                             material="opacity: 1" debug-raycaster>
                             <a-entity data-raycastable gltf-model="/src/assets/robot/robot.glb"

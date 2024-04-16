@@ -66,7 +66,7 @@ namespace MRInteractiveMural.Server.Controllers
         [HttpPost("models")]
         public ArtModels AddModel(ArtModels model)
         {
-            String jsonString = model.fileImport.ToString();
+
             //JsonDocument doc = JsonDocument.Parse(jsonString);
             //JsonElement rawFile = doc.RootElement.GetProperty("rawFile");
             //doc = JsonDocument.Parse(rawFile.ToString());

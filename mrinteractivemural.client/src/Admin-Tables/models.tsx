@@ -49,9 +49,7 @@ export const ModelCreate = () => (
                 />
             </ReferenceInput>
             <TextInput source="modelFilePath"/>
-            <FileInput source="fileImport">
-                <FileField source="src" title="title" />
-            </FileInput>
+
         
 
         {/* <div>

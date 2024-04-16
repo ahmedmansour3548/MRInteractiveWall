@@ -231,6 +231,6 @@ C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\static
 C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MRInteractiveMural.Server.props
 C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\scopedcss\bundle\MRInteractiveMural.Server.styles.css
-C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.csproj.CopyComplete
 C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\MRInteractiveMural.Server.genruntimeconfig.cache
 C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\ref\MRInteractiveMural.Server.dll
+C:\Users\Ahmed\Playground\MRIW\MRInteractiveMural.Server\obj\Debug\net8.0\MRIntera.13E1CF8D.Up2Date
