@@ -1,113 +1,448 @@
-import { NavLink } from 'react-router-dom';
-import { AR } from './AR';
-import './AR.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Admin.css';
+
+function AdminComponent() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loginError, setLoginError] = useState('');
+
+    // Tabs control
+    const [activeTab, setActiveTab] = useState('models');
+
+    // Members state
+    const [members, setMembers] = useState([]);
+    const [showNewMemberForm, setShowNewMemberForm] = useState(false);
+    const [newMember, setNewMember] = useState({ name: '', number: '', email: '', note: '', role: '' });
+    const [editingMemberId, setEditingMemberId] = useState(null);
+    const [editedMember, setEditedMember] = useState({});
+
+    // Models state
+    const [models, setModels] = useState([]);
+    const [showNewModelForm, setShowNewModelForm] = useState(false);
+    const [newModel, setNewModel] = useState({ modelName: '', labMemberID: '', modelFilePath: '', modelFileName: '' });
+    const [editingModelId, setEditingModelId] = useState(null);
+    const [editedModel, setEditedModel] = useState({});
+
+	const [showFloatingPanel, setShowFloatingPanel] = useState(false);
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post('https://localhost:7121/api/admin/login', { username, password });
+            if (response.status === 200) {
+                setIsLoggedIn(true);
+                setLoginError('');
+            } else {
+                throw new Error('Login failed');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            setIsLoggedIn(false);
+            setLoginError('Failed to log in. Please check your credentials.');
+        }
+    };
+
+    const populateModels = async () => {
+        try {
+            const response = await axios.get('https://localhost:7121/api/models');
+            setModels(response.data);
+        } catch (error) {
+            console.error('Error fetching models:', error);
+        }
+    };
+
+    const handleAddModel = async () => {
+        try {
+            await axios.post('https://localhost:7121/api/models', newModel);
+            setNewModel({ modelName: '', labMemberID: '', modelFilePath: '', modelFileName: '' });
+            setShowNewModelForm(false);
+            populateModels();
+        } catch (error) {
+            console.error('Error adding model:', error);
+        }
+    };
+
+    const handleEditModel = (model) => {
+        setEditingModelId(model.id);
+        setEditedModel({ ...model });
+    };
+
+    const handleSaveEditModel = async (modelId) => {
+        const updatedModel = {
+            ...editedModel, // Spread existing fields
+            id: modelId, // Ensure correct ID is used, assuming `editedModel` does not store it
+            fileImport: {
+                options: { propertyNameCaseInsensitive: true },
+                parent: {
+                    options: { propertyNameCaseInsensitive: true },
+                    parent: "someValue", // You need to define how these values are set or updated
+                    root: "someValue"
+                },
+                root: {
+                    options: { propertyNameCaseInsensitive: true },
+                    parent: "someValue",
+                    root: "someValue"
+                }
+            }
+        };
+
+        try {
+            await axios.put(`https://localhost:7121/api/models/${modelId}`, updatedModel, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            setEditingModelId(null); // Exit edit mode
+            setEditedModel({}); // Clear the edited model data
+            populateModels(); // Refresh the models list
+        } catch (error) {
+            console.error('Error saving model:', error);
+        }
+    };
 
 
-/**
- * The main AR component, responsible for displaying the AR content using AR.JS
- * 
- * @returns the page HTML
- */
-const ARComponent = () => {
+    const handleDeleteModel = async (modelId) => {
+        const userConfirmed = window.confirm("Are you sure you want to delete this model?");
+        if (userConfirmed) {
+            try {
+                await axios.delete(`https://localhost:7121/api/models/${modelId}`);
+                populateModels();
+            } catch (error) {
+                console.error('Error deleting model:', error);
+            }
+        }
+    };
 
-    const { isSceneVisible, toggleSceneVisibility, handleSwapButtonClick, modelPath, currentModelId } = AR();
+
+    const populateMembers = async () => {
+        try {
+            const response = await axios.get('https://localhost:7121/api/members');
+            setMembers(response.data);
+            console.log("Number of members in database: " + response.data.length);
+        } catch (error) {
+            console.error('Error fetching members:', error);
+        }
+    };
 
 
-    return (
-        <>
-            <div className="buttonsContainer">
-                <div className="swapModelButtonContainer">
-                    <button className="swapModelButton" onClick={handleSwapButtonClick}>Swap Model</button>
-                </div>
-                <div className="homeButtonContainer">
-                    <NavLink className="homeNavLink" to="/" >Return Home</NavLink>
-                </div>
-                
-                
-            </div>
+    useEffect(() => {
+        if (activeTab === 'members') {
+            populateMembers();
+        }
+        else if(activeTab === 'models') {
+            populateModels();
+        }
+    }, [activeTab]);
 
-            {isSceneVisible && (
-                <a-scene gesture-detector arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5; debugUIEnabled: true;' click-listener>
-                    <a-marker type="pattern" preset="hiro" id="interactable-marker">
-                        <a-entity data-raycastable gltf-model={modelPath}
-                            position="0 0 0.5"
-                            scale="0.2 0.2 0.2"
-                            animation-mixer="clip: idle; loop: repeat">
-                        </a-entity>
-                    </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/001.patt" id="interactable-marker">
-                        <a-box id="button" name="1" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
-                        <a-plane id="plane" name="1" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
-                    </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/002.patt" id="interactable-marker">
-                        <a-box id="button" name="2" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
-                        <a-plane id="plane" name="2" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
-                    </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/003.patt" id="3">
-                        <a-box id="button" name="3"  data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;'/>
-                        <a-plane id="plane" name="3" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true"/>
-                    </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/003.patt" id="4">
-                        <a-box id="button" name="4" data-raycastable position='0 0 0.2' scale='1 1 0.2' material='color: blue; opacity: 0.9;' />
-                        <a-plane id="plane" name="4" data-raycastable position="0 0 0" scale="2 2 2" material="opacity: 0; transparent: true" />
-                    </a-marker>
-                    {/*<a-marker type="barcode" value="3" id="interactable-marker">
-                            <a-box id="animated-model" name="redbox" data-raycastable class="interactive-entity" position='0 0 0.2' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
-                                animation="property: scale; to: 0.3 0.3 0.3; dir: alternate; dur: 2000; easing: easeInOutQuad; loop: true">
-                            </a-box>
-                    </a-marker>
-                    </a-entity>
-                        <a-entity id="animated-model" name="triangle" data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
-                        position="-0.5 1 1"
-                        scale="0.2 0.2 0.2"
-                            animation-mixer="clip: *; loop: repeat; timeScale: 1;">
+    const handleAddMember = async () => {
+        try {
+            await axios.post('https://localhost:7121/api/members', newMember);
+            setNewMember({ name: '', number: '', email: '', note: '', role: '' }); // Reset new member form
+            setShowNewMemberForm(false); // Hide the form
+            populateMembers(); // Refresh the members list
+        } catch (error) {
+            console.error('Error adding new member:', error);
+        }
+    };
 
-                        </a-entity>
-                        <a-plane id="animated-model" data-raycastable name="triangleinvisible" position="-0.5 1 1" scale="1 1 1"
-                            material="opacity: 0.5; transparent: true"
 
-                        ></a-plane>
-                        <a-entity id="animated-model" name="robot" data-raycastable gltf-model="/src/assets/robot/robot.glb"
-                        position="-0.5 0.5 1"
-                        scale="0.2 0.2 0.2"
-                        animation-mixer="clip: *; loop: repeat; timeScale: 1;">
-                    </a-entity>
-                    */}{/* Red Box */}{/*
-                        <a-box id="animated-model" name="redbox" data-raycastable class="interactive-entity" position='0 -0.5 0' scale='0.2 0.2 0.2' material='color: red; opacity: 1;'
-                        animation="property: scale; to: 0.5 0.5 0.5; dir: alternate; dur: 2000; easing: easeInOutQuad; loop: true">
-                    </a-box>
-                    */}{/* Blue Box */}{/*
-                        <a-box id="animated-model" name="bluebox" data-raycastable position='0 0 0.5' scale='0.1 0.1 0.1' material='color: blue; opacity: 0.8;'
-                        animation="property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear">
-                    </a-box>
-                    */}{/* Green Box */}{/*
-                        <a-box id="animated-model" name="greenbox" data-raycastable position='0 0 0' scale='0.15 0.15 0.15' material='color: green; opacity: 0.6;'
-                        animation="property: position; to: 0.2 0.4 0; dir: alternate; dur: 3000; easing: easeInOutSine; loop: true">
-                    </a-box>
-                    */}{/* Yellow Box */}{/*
-                        <a-box id="animated-model" name="yellowbox" data-raycastable position='0.6 -0.3 -0.6' scale='0.12 0.12 0.12' material='color: yellow; opacity: 1;'
-                        animation="property: material.opacity; from: 1; to: 0.1; dir: alternate; dur: 5000; easing: easeInOutQuad; loop: true">
-                    </a-box>
-                    */}{/* Purple Box */}{/*
-                        <a-box id="animated-model" name="purplebox" data-raycastable position='0.9 0 0' scale='0.2 0.05 0.05' material='color: purple; opacity: 0.9;'
-                        animation="property: rotation; to: 0 0 360; loop: true; dur: 2000; easing: linear"
-                        animation__pos="property: position; to: 0 0.4 0.3; dir: alternate; dur: 4500; easing: easeInOutSine; loop: true">
-                    </a-box>*/}
+    const handleEdit = (member) => {
+        setEditingMemberId(member.id);
+        setEditedMember({ ...member });
+    };
 
-                
-                    <a-camera
-                        id="camera"
+    const handleDelete = async (memberId) => {
+        const userConfirmed = window.confirm("Are you sure you want to delete this member?");
+        if (userConfirmed) {
+            try {
+                await axios.delete(`https://localhost:7121/api/members/${memberId}`);
+                populateMembers(); // Refresh list
+            } catch (error) {
+                console.error('Error deleting member:', error);
+            }
+        }
+    };
 
-                        look-controls="enabled: false"
-                        position="0 0 0"
-                        raycaster="objects: .clickable"
-                        cursor="fuse: false;
-                            rayOrigin: mouse;">
-                </a-camera>
-                </a-scene>
-            )}
-        </>
+    const handleSaveEdit = async (memberId) => {
+        try {
+            await axios.put(`https://localhost:7121/api/members/${memberId}`, editedMember);
+            setEditingMemberId(null); // Exit edit mode
+            setEditedMember({}); // Clear the edited member data
+            populateMembers(); // Refresh list
+        } catch (error) {
+            console.error('Error saving member:', error);
+        }
+    };
+
+    const renderTabs = () => (
+        <div>
+            <button onClick={() => setActiveTab('models')}>Models</button>
+            <button onClick={() => setActiveTab('members')}>Members</button>
+        </div>
     );
-};
 
-export default ARComponent;
+    const renderModelsTab = () => (
+        <div>
+            <h3>Models</h3>
+            <button type="button" onClick={() => setShowNewModelForm(!showNewModelForm)}>Add New Model</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Model Name</th>
+                        <th>Lab Member ID</th>
+                        <th>Model File Path</th>
+                        <th>Model File Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {models.map((model) => (
+                        <tr key={model.id}>
+                            <td>{model.id}</td>
+                            <td>
+                                {editingModelId === model.id ? (
+                                    <input
+                                        type="text"
+                                        value={editedModel.modelName}
+                                        onChange={(e) => setEditedModel({ ...editedModel, modelName: e.target.value })}
+                                    />
+                                ) : (
+                                    model.modelName
+                                )}
+                            </td>
+                            <td>
+                                {editingModelId === model.id ? (
+                                    <input
+                                        type="number"
+                                        value={editedModel.labMemberID}
+                                        onChange={(e) => setEditedModel({ ...editedModel, labMemberID: e.target.value })}
+                                    />
+                                ) : (
+                                    model.labMemberID
+                                )}
+                            </td>
+                            <td>
+                                {editingModelId === model.id ? (
+                                    <input
+                                        type="text"
+                                        value={editedModel.modelFilePath}
+                                        onChange={(e) => setEditedModel({ ...editedModel, modelFilePath: e.target.value })}
+                                    />
+                                ) : (
+                                    model.modelFilePath
+                                )}
+                            </td>
+                            <td>
+                                {editingModelId === model.id ? (
+                                    <input
+                                        type="text"
+                                        value={editedModel.modelFileName}
+                                        onChange={(e) => setEditedModel({ ...editedModel, modelFileName: e.target.value })}
+                                    />
+                                ) : (
+                                    model.modelFileName
+                                )}
+                            </td>
+                            <td>
+                                {editingModelId === model.id ? (
+                                    <>
+                                        <button onClick={() => handleSaveEditModel(model.id)}>Save</button>
+                                        <button onClick={() => setEditingModelId(null)}>Cancel</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button onClick={() => handleEditModel(model)}>Edit</button>
+                                        <button onClick={() => handleDeleteModel(model.id)}>Delete</button>
+                                    </>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                    {showNewModelForm && (
+                        <tr>
+                            <td>{models.length + 1}</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Model Name"
+                                    value={newModel.modelName}
+                                    onChange={(e) => setNewModel({ ...newModel, modelName: e.target.value })}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    placeholder="Lab Member ID"
+                                    value={newModel.labMemberID}
+                                    onChange={(e) => setNewModel({ ...newModel, labMemberID: e.target.value })}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Model File Path"
+                                    value={newModel.modelFilePath}
+                                    onChange={(e) => setNewModel({ ...newModel, modelFilePath: e.target.value })}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Model File Name"
+                                    value={newModel.modelFileName}
+                                    onChange={(e) => setNewModel({ ...newModel, modelFileName: e.target.value })}
+                                />
+                            </td>
+                            <td>
+                                <button onClick={handleAddModel}>Save</button>
+                                <button onClick={() => setShowNewModelForm(false)}>Cancel</button>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        </div>
+    );
+
+
+
+    const renderMembersTab = () => (
+		<div>
+			<h3>Members</h3>
+			<button type="button" onClick={() => setShowNewMemberForm(!showNewMemberForm)}>Add New Member</button>
+
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Number</th>
+						<th>Email</th>
+						<th>Note</th>
+						<th>Role</th>
+						<th>Marker</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{members.map((member) => (
+						<tr key={member.id}>
+							<td>{member.id}</td>
+							<td>
+								{editingMemberId === member.id ? (
+									<input type="text" value={editedMember.name || ''} onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })} />
+								) : (
+									member.name
+								)}
+							</td>
+							<td>
+								{editingMemberId === member.id ? (
+									<input type="text" value={editedMember.number || ''} onChange={(e) => setEditedMember({ ...editedMember, number: e.target.value })} />
+								) : (
+									member.number
+								)}
+							</td>
+							<td>
+								{editingMemberId === member.id ? (
+									<input type="text" value={editedMember.email || ''} onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })} />
+								) : (
+									member.email
+								)}
+							</td>
+							<td>
+								{editingMemberId === member.id ? (
+									<input type="text" value={editedMember.note || ''} onChange={(e) => setEditedMember({ ...editedMember, note: e.target.value })} />
+								) : (
+									member.note
+								)}
+							</td>
+							<td>
+								{editingMemberId === member.id ? (
+									<input type="text" value={editedMember.role || ''} onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })} />
+								) : (
+									member.role
+								)}
+							</td>
+							<td>
+								<button onClick={() => handleMarker(member)}>Marker</button>
+								{editingMemberId === member.id ? (
+									<>
+										<button onClick={() => handleSaveEdit(member.id)}>Save</button>
+										<button onClick={() => setEditingMemberId(null)}>Cancel</button>
+									</>
+								) : (
+									<>
+										<button onClick={() => handleEdit(member)}>Edit</button>
+										<button onClick={() => handleDelete(member.id)}>Delete</button>
+									</>
+								)}
+							</td>
+						</tr>
+					))}
+					{showNewMemberForm && (
+						<tr>
+							<td>{members.length + 1}</td>
+							<td><input type="text" placeholder="Name" value={newMember.name} onChange={(e) => setNewMember({ ...newMember, name: e.target.value })} /></td>
+							<td><input type="text" placeholder="Number" value={newMember.number} onChange={(e) => setNewMember({ ...newMember, number: e.target.value })} /></td>
+							<td><input type="text" placeholder="Email" value={newMember.email} onChange={(e) => setNewMember({ ...newMember, email: e.target.value })} /></td>
+							<td><input type="text" placeholder="Note" value={newMember.note} onChange={(e) => setNewMember({ ...newMember, note: e.target.value })} /></td>
+							<td><input type="text" placeholder="Role" value={newMember.role} onChange={(e) => setNewMember({ ...newMember, role: e.target.value })} /></td>
+							<td>
+								<button onClick={handleAddMember}>Save</button>
+								<button onClick={() => setShowNewMemberForm(false)}>Cancel</button>
+							</td>
+						</tr>
+					)}
+				</tbody>
+			</table>
+			{showFloatingPanel && (
+				<div className="floating-panel">
+					<div className="floating-panel-content">
+						<h3>Upload Marker Image</h3>
+						<input type="file" onChange={handleFileUpload} />
+						<button onClick={() => setShowFloatingPanel(false)}>Close</button>
+					</div>
+				</div>
+			)}
+		</div>
+	);
+
+
+
+
+
+
+
+    if (!isLoggedIn) {
+        return (
+            <div className = "admin-container">
+                <h2>Admin Login</h2>
+                <form onSubmit={handleLogin}>
+                    <div>
+                        <label>Username:</label>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+            </div>
+        );
+    } else {
+        return (
+            <div className="admin-container">
+                <h2>VARLAB Mixed Reality Interactive Mural Admin Panel</h2>
+                {renderTabs()}
+                {activeTab === 'models' ? renderModelsTab() : renderMembersTab()}
+            </div>
+        );
+    }
+}
+
+export default AdminComponent;
