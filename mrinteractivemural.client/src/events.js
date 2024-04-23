@@ -1,6 +1,6 @@
 import { AR } from './ar.js';
 
-AFRAME.registerComponent('markerhandler', {
+/*AFRAME.registerComponent('markerhandler', {
     init: function () {
         // Initialize clipNames here instead of in the schema to ensure it's always defined.
         this.clipNames = ['idle', 'hiphop', 'chicken', 'pockets'];
@@ -29,7 +29,7 @@ AFRAME.registerComponent('markerhandler', {
             }
         });
     }
-});
+});*/
 AFRAME.registerComponent('click-listener', {
     init: function () {
         this.camera = this.el.sceneEl.camera;
@@ -71,13 +71,12 @@ AFRAME.registerComponent('click-listener', {
 
         if (intersects.length > 0) {
             // Log or handle the first intersected object
-            console.log("INTERSECTIONS");
             console.log(intersects);
             const firstIntersection = intersects[0].object.el; // Get the A-Frame element of the intersected object
-            if (firstIntersection.matches('#plane')) {
-                console.log('Intersected with the plane! ' + firstIntersection.getAttribute('name'));
+            if (firstIntersection.matches('#_1')) {
+                console.log('Intersected with the 1!!' + firstIntersection.getAttribute('name'));
                 // Additional logic based on the intersection can be added here
-                AR.loadModelById(firstIntersection.getAttribute('name'))
+                AR().loadModelById(firstIntersection.getAttribute('name'));
             }
         }
 

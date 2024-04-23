@@ -9,12 +9,6 @@
 import { useState, useEffect } from 'react';
 
 /**
- * Fetches and loads the model based on the provided model ID.
- * 
- * @param {number} id - The ID of the model to load.
- */
-
-/**
  * Hook that manages the AR scene's state and interactions.
  * 
  * @returns {Object} The visibility state of the AR scene, and functions to toggle this state and handle button clicks for model swapping.
@@ -44,8 +38,16 @@ export const AR = () => {
         setIsSceneVisible((prevState) => !prevState);
     };
 
-    function loadModelById(id) {
-        const apiUrl = `https://localhost:7121/api/models/${id}`;
+    const handleSwapButtonClick = () => {
+        loadModel(currentModelIndex + 1);
+    };
+
+
+    /**
+     * Fetches and loads the model based on the provided model ID.
+     */
+    const loadModelById = (id) => {
+        const apiUrl = `https://localhost:7121/api/getGitHubModel?folderName=2`;
         console.log("gotin!");
         fetch(apiUrl)
             .then((response) => response.json())
@@ -55,36 +57,29 @@ export const AR = () => {
                 //const newPath = `${data.modelFilePath}${data.modelFileName}`;
 
                 // Use this path in development (Python local server)
-                const devModelPath = "http://localhost:8000/models/" + data.modelFileName;
-                console.log(AR);
+                const modelPath = data.modelUrl;
 
+                // Set the model path using setModelPath
+                setModelPath(modelPath);
             })
             .catch((error) => console.error('Error loading the model:', error));
-    }
-
-
-    const handleSwapButtonClick = () => {
-        loadModel(currentModelIndex + 1);
     };
 
-    /**
-     * Fetches and loads the model based on the provided model ID.
-     */
     function loadModel() {
-        const apiUrl = `https://localhost:7121/api/models/${currentModelIndex + 1}`;
+        const apiUrl = `https://localhost:7121/api/getGitHubModel?folderName=1`;
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.modelFileName);
+                console.log(data);
                 // Use this path in Production
                 //const newPath = `${data.modelFilePath}${data.modelFileName}`;
 
                 // Use this path in development (Python local server)
-                const devModelPath = "http://localhost:8000/models/" + data.modelFileName;
+                //const devModelPath = "http://localhost:8000/models/" + data.modelFileName;
 
                 // Set the gltf-model path
-                setModelPath(devModelPath);
+                setModelPath(data.modelUrl);
 
                 // Update text
                 setCurrentModelId(currentModelIndex + 1);

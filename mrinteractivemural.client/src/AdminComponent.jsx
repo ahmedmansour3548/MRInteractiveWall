@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Admin.css';
+import THREEx from './threex-arpatternfile';
 
 function AdminComponent() {
     const [username, setUsername] = useState('');
@@ -13,6 +14,8 @@ function AdminComponent() {
 
     // Members state
     const [members, setMembers] = useState([]);
+    const [memberNames, setMemberNames] = useState([]);
+    const [selectedMember, setSelectedMember] = useState('');
     const [showNewMemberForm, setShowNewMemberForm] = useState(false);
     const [newMember, setNewMember] = useState({ name: '', number: '', email: '', note: '', role: '' });
     const [editingMemberId, setEditingMemberId] = useState(null);
@@ -20,11 +23,20 @@ function AdminComponent() {
 
     // Models state
     const [models, setModels] = useState([]);
-    const [showNewModelForm, setShowNewModelForm] = useState(false);
     const [newModel, setNewModel] = useState({ modelName: '', labMemberID: '', modelFilePath: '', modelFileName: '' });
     const [editingModelId, setEditingModelId] = useState(null);
     const [editedModel, setEditedModel] = useState({});
+    const [showModelPanel, setShowModelPanel] = useState(false);
+    const [modelFile, setModelFile] = useState(null);
 
+    const [exampleMarkerURL, setExampleMarkerURL] = useState('');
+    const [innerImageURL, setInnerImageURL] = useState(null);
+    const [fullMarkerURL, setFullMarkerURL] = useState(null);
+    const [showDownloadButton, setShowDownloadButton] = useState(false);
+    const [showMemberPanel, setShowMemberPanel] = useState(false);
+    const [imageName, setImageName] = useState();
+    const [patternRatio, setPatternRatio] = useState(50);
+    const [imageSize, setImageSize] = useState(512);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -45,6 +57,7 @@ function AdminComponent() {
     };
 
     const populateModels = async () => {
+        setEditedModel({});
         try {
             const response = await axios.get('https://localhost:7121/api/models');
             setModels(response.data);
@@ -53,39 +66,45 @@ function AdminComponent() {
         }
     };
 
+    const handleAddNewModel = () => {
+        setEditedModel({});
+        setEditingModelId(null);
+        setShowModelPanel(true);
+    };
+
     const handleAddModel = async () => {
         try {
-            console.log(newModel);
-            await axios.post('https://localhost:7121/api/models', newModel);
+            await axios.post('https://localhost:7121/api/models', editedModel);
             setNewModel({ modelName: '', labMemberID: '', modelFilePath: '', modelFileName: '' });
-            setShowNewModelForm(false);
+
+            const formData = new FormData();
+            formData.append('file', modelFile);
+            console.log(modelFile);
+            const response = await axios.post('https://localhost:7121/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            if (response.status === 200) {
+                alert('File uploaded successfully!');
+            } else {
+                alert('Error uploading file. Please try again later.');
+            }
             populateModels();
         } catch (error) {
             console.error('Error adding model:', error);
         }
     };
 
-    const handleEditModel = (model) => {
-        setEditingModelId(model.id);
-        setEditedModel({ ...model });
-    };
-
-    const handleSaveEditModel = async (modelId) => {
-        const updatedModel = {
-            ...editedModel, // Spread existing fields
-            id: modelId, // Ensure correct ID is used, assuming `editedModel` does not store it
-            
-        };
-
+    const handleSaveEditModel = async () => {
         try {
-            await axios.put(`https://localhost:7121/api/models/${modelId}`, updatedModel, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            setEditingModelId(null); // Exit edit mode
-            setEditedModel({}); // Clear the edited model data
-            populateModels(); // Refresh the models list
+            await axios.put(`https://localhost:7121/api/models/${editedModel.id}`, editedModel);
+            setEditedModel({});
+            setEditingModelId(null);
+            populateModels();
+            setShowModelPanel(false);
         } catch (error) {
-            console.error('Error saving model:', error);
+            console.error('Error saving edited model:', error);
         }
     };
 
@@ -106,8 +125,10 @@ function AdminComponent() {
     const populateMembers = async () => {
         try {
             const response = await axios.get('https://localhost:7121/api/members');
+            const memberNames = response.data.map(member => member.name);
+            setMemberNames(memberNames);
             setMembers(response.data);
-            console.log("Number of members in database: " + response.data.length);
+            console.log("Number of members in database: " + memberNames.length);
         } catch (error) {
             console.error('Error fetching members:', error);
         }
@@ -118,7 +139,7 @@ function AdminComponent() {
         if (activeTab === 'members') {
             populateMembers();
         }
-        else if(activeTab === 'models') {
+        else if (activeTab === 'models') {
             populateModels();
         }
     }, [activeTab]);
@@ -134,13 +155,86 @@ function AdminComponent() {
         }
     };
 
-
-    const handleEdit = (member) => {
-        setEditingMemberId(member.id);
-        setEditedMember({ ...member });
+    const handleAddNewMember = () => {
+        setEditedMember({});
+        setEditingMemberId(null);
+        setShowMemberPanel(true);
     };
 
-    const handleDelete = async (memberId) => {
+    const handleEditModel = (model) => {
+        setEditedModel({ ...model });
+        setEditingModelId(model.id);
+        setShowModelPanel(true);
+    };
+
+    const handleCancelModelEdit = () => {
+        setEditedModel({});
+        setEditingModelId(null);
+        setShowModelPanel(false);
+    };
+
+    // Function to handle image upload and display
+    // Code logic from: https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/marker-training/examples/generator.html#L263
+    const handleMarkerUpload = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        setImageName(file.name);
+        reader.onload = (e) => {
+            const imageUrl = e.target.result;
+            setInnerImageURL(imageUrl);
+            buildFullMarker(imageUrl);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const buildFullMarker = (imageUrl) => {
+        THREEx.ArPatternFile.buildFullMarker(
+            imageUrl,
+            patternRatio / 100,
+            imageSize,
+            'black',
+            function onComplete(markerUrl) {
+                setFullMarkerURL(markerUrl);
+                
+                setShowDownloadButton(true);
+            }
+        );
+
+        // Preview
+        THREEx.ArPatternFile.buildFullMarker(
+            imageUrl,
+            patternRatio / 100,
+            512,
+            'black',
+            function onComplete(markerUrl) {
+                setExampleMarkerURL(markerUrl);
+            }
+        );
+    };
+    const handleDownloadPattern = () => {
+        // Initiate download
+        THREEx.ArPatternFile.encodeImageURL(fullMarkerURL, function onComplete(patternFileString) {
+            THREEx.ArPatternFile.triggerDownload(patternFileString, "pattern-" + (imageName || "marker") + ".patt")
+        })
+    };
+
+    const handleModelUpload = (event) => {
+        setModelFile(event.target.files[0]);
+    };
+
+    const handleEditMember = (member) => {
+        setEditedMember({ ...member });
+        setEditingMemberId(member.id);
+        setShowMemberPanel(true);
+    };
+
+    const handleCancelMemberEdit = () => {
+        setEditedMember({}); // Reset editedMember state
+        setEditingMemberId(null); // Reset editingMemberId state
+        setShowMemberPanel(false);
+    };
+
+    const handleDeleteMember = async (memberId) => {
         const userConfirmed = window.confirm("Are you sure you want to delete this member?");
         if (userConfirmed) {
             try {
@@ -152,15 +246,26 @@ function AdminComponent() {
         }
     };
 
-    const handleSaveEdit = async (memberId) => {
+    const handleSaveEditMember = async (memberId) => {
         try {
             await axios.put(`https://localhost:7121/api/members/${memberId}`, editedMember);
-            setEditingMemberId(null); // Exit edit mode
-            setEditedMember({}); // Clear the edited member data
+            setEditedMember({}); // Reset editedMember state
+            setEditingMemberId(null); // Reset editingMemberId state
             populateMembers(); // Refresh list
         } catch (error) {
             console.error('Error saving member:', error);
         }
+    };
+
+    const handlePatternRatioChange = (event) => {
+        const newRatio = event.target.value;
+        setPatternRatio(newRatio);
+        buildFullMarker(innerImageURL);
+    };
+
+    const handleImageSizeChange = (event) => {
+        const newSize = event.target.value;
+        setImageSize(newSize);
     };
 
     const renderTabs = () => (
@@ -173,7 +278,7 @@ function AdminComponent() {
     const renderModelsTab = () => (
         <div>
             <h3>Models</h3>
-            <button type="button" onClick={() => setShowNewModelForm(!showNewModelForm)}>Add New Model</button>
+            <button type="button" onClick={() => handleAddNewModel()}>Add New Model</button>
 
             <table>
                 <thead>
@@ -191,104 +296,59 @@ function AdminComponent() {
                         <tr key={model.id}>
                             <td>{model.id}</td>
                             <td>
-                                {editingModelId === model.id ? (
-                                    <input
-                                        type="text"
-                                        value={editedModel.modelName}
-                                        onChange={(e) => setEditedModel({ ...editedModel, modelName: e.target.value })}
-                                    />
-                                ) : (
-                                    model.modelName
-                                )}
+                                {model.modelName}
                             </td>
                             <td>
-                                {editingModelId === model.id ? (
-                                    <input
-                                        type="number"
-                                        value={editedModel.labMemberID}
-                                        onChange={(e) => setEditedModel({ ...editedModel, labMemberID: e.target.value })}
-                                    />
-                                ) : (
-                                    model.labMemberID
-                                )}
+                                {model.labMemberID}
                             </td>
                             <td>
-                                {editingModelId === model.id ? (
-                                    <input
-                                        type="text"
-                                        value={editedModel.modelFilePath}
-                                        onChange={(e) => setEditedModel({ ...editedModel, modelFilePath: e.target.value })}
-                                    />
-                                ) : (
-                                    model.modelFilePath
-                                )}
+                                {model.modelFilePath}
                             </td>
                             <td>
-                                {editingModelId === model.id ? (
-                                    <input
-                                        type="text"
-                                        value={editedModel.modelFileName}
-                                        onChange={(e) => setEditedModel({ ...editedModel, modelFileName: e.target.value })}
-                                    />
-                                ) : (
-                                    model.modelFileName
-                                )}
+                                {model.modelFileName}
                             </td>
                             <td>
-                                {editingModelId === model.id ? (
-                                    <>
-                                        <button onClick={() => handleSaveEditModel(model.id)}>Save</button>
-                                        <button onClick={() => setEditingModelId(null)}>Cancel</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button onClick={() => handleEditModel(model)}>Edit</button>
-                                        <button onClick={() => handleDeleteModel(model.id)}>Delete</button>
-                                    </>
-                                )}
+                                <button onClick={() => handleEditModel(model)}>Edit</button>
+                                <button onClick={() => handleDeleteModel(model.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
-                    {showNewModelForm && (
-                        <tr>
-                            <td>{models.length + 1}</td>
-                            <td>
+                    {showModelPanel && (
+                        <div className="floating-panel-overlay">
+                            <div className="floating-panel">
+                                {/* Title of the floating panel */}
+                                <h3>{editingModelId !== null ? 'Edit Model' : 'Add New Model'}</h3>
+                                {/* Input fields */}
                                 <input
                                     type="text"
                                     placeholder="Model Name"
-                                    value={newModel.modelName}
-                                    onChange={(e) => setNewModel({ ...newModel, modelName: e.target.value })}
+                                    value={editedModel ? editedModel.modelName : ''}
+                                    onChange={(e) => setEditedModel({ ...editedModel, modelName: e.target.value })}
                                 />
-                            </td>
-                            <td>
                                 <input
-                                    type="number"
+                                    type="text"
                                     placeholder="Lab Member ID"
-                                    value={newModel.labMemberID}
-                                    onChange={(e) => setNewModel({ ...newModel, labMemberID: e.target.value })}
+                                    value={editedModel ? editedModel.labMemberID : ''}
+                                    onChange={(e) => setEditedModel({ ...editedModel, labMemberID: e.target.value })}
                                 />
-                            </td>
-                            <td>
                                 <input
                                     type="text"
                                     placeholder="Model File Path"
-                                    value={newModel.modelFilePath}
-                                    onChange={(e) => setNewModel({ ...newModel, modelFilePath: e.target.value })}
+                                    value={editedModel ? editedModel.modelFilePath : ''}
+                                    onChange={(e) => setEditedModel({ ...editedModel, modelFilePath: e.target.value })}
                                 />
-                            </td>
-                            <td>
                                 <input
                                     type="text"
                                     placeholder="Model File Name"
-                                    value={newModel.modelFileName}
-                                    onChange={(e) => setNewModel({ ...newModel, modelFileName: e.target.value })}
+                                    value={editedModel ? editedModel.modelFileName : ''}
+                                    onChange={(e) => setEditedModel({ ...editedModel, modelFileName: e.target.value })}
                                 />
-                            </td>
-                            <td>
-                                <button onClick={handleAddModel}>Save</button>
-                                <button onClick={() => setShowNewModelForm(false)}>Cancel</button>
-                            </td>
-                        </tr>
+                                <input type="file" onChange={handleModelUpload} />
+                                {/* Save and Cancel buttons */}
+                                <button onClick={editingModelId !== null ? handleSaveEditModel : handleAddModel}>Save</button>
+                                <button onClick={() => handleCancelModelEdit()}>Cancel</button>
+                            </div>
+                        </div>
                     )}
                 </tbody>
             </table>
@@ -300,7 +360,7 @@ function AdminComponent() {
     const renderMembersTab = () => (
         <div>
             <h3>Members</h3>
-            <button type="button" onClick={() => setShowNewMemberForm(!showNewMemberForm)}>Add New Member</button>
+            <button type="button" onClick={() => handleAddNewMember()}>Add New Member</button>
 
             <table>
                 <thead>
@@ -319,81 +379,87 @@ function AdminComponent() {
                         <tr key={member.id}>
                             <td>{member.id}</td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <input type="text" value={editedMember.name || ''} onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })} />
-                                ) : (
-                                    member.name
-                                )}
+                                {member.name}
                             </td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <input type="text" value={editedMember.number || ''} onChange={(e) => setEditedMember({ ...editedMember, number: e.target.value })} />
-                                ) : (
-                                    member.number
-                                )}
+                                {member.number}
                             </td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <input type="text" value={editedMember.email || ''} onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })} />
-                                ) : (
-                                    member.email
-                                )}
+                                {member.email}
                             </td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <input type="text" value={editedMember.note || ''} onChange={(e) => setEditedMember({ ...editedMember, note: e.target.value })} />
-                                ) : (
-                                    member.note
-                                )}
+                                {member.note}
                             </td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <input type="text" value={editedMember.role || ''} onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })} />
-                                ) : (
-                                    member.role
-                                )}
+                                {member.role}
                             </td>
                             <td>
-                                {editingMemberId === member.id ? (
-                                    <>
-                                        <button onClick={() => handleSaveEdit(member.id)}>Save</button>
-                                        <button onClick={() => setEditingMemberId(null)}>Cancel</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button onClick={() => handleEdit(member)}>Edit</button>
-                                        <button onClick={() => handleDelete(member.id)}>Delete</button>
-                                    </>
-                                )}
+                                <button onClick={() => handleEditMember(member)}>Edit</button>
+                                <button onClick={() => handleDeleteMember(member.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
-                    {showNewMemberForm && (
-                        <tr>
-                            <td>{members.length + 1}</td>
-                            <td><input type="text" placeholder="Name" value={newMember.name} onChange={(e) => setNewMember({ ...newMember, name: e.target.value })} /></td>
-                            <td><input type="text" placeholder="Number" value={newMember.number} onChange={(e) => setNewMember({ ...newMember, number: e.target.value })} /></td>
-                            <td><input type="text" placeholder="Email" value={newMember.email} onChange={(e) => setNewMember({ ...newMember, email: e.target.value })} /></td>
-                            <td><input type="text" placeholder="Note" value={newMember.note} onChange={(e) => setNewMember({ ...newMember, note: e.target.value })} /></td>
-                            <td><input type="text" placeholder="Role" value={newMember.role} onChange={(e) => setNewMember({ ...newMember, role: e.target.value })} /></td>
-                            <td>
-                                <button onClick={handleAddMember}>Save</button>
-                                <button onClick={() => setShowNewMemberForm(false)}>Cancel</button>
-                            </td>
-                        </tr>
-                    )}
                 </tbody>
             </table>
+            {/* Floating panel for adding new member */}
+            {showMemberPanel && (
+                <div className="floating-panel-overlay">
+                    <div className="floating-panel">
+                        <h3>{editingMemberId !== null ? 'Edit Member' : 'Add New Member'}</h3>
+                        {/* Input fields for adding or editing a member */}
+                        <input type="text" placeholder="Name" value={editedMember.name} onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })} />
+                        <input type="text" placeholder="Number" value={editedMember.number} onChange={(e) => setEditedMember({ ...editedMember, number: e.target.value })} />
+                        <input type="text" placeholder="Email" value={editedMember.email} onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })} />
+                        <input type="text" placeholder="Note" value={editedMember.note} onChange={(e) => setEditedMember({ ...editedMember, note: e.target.value })} />
+                        <input type="text" placeholder="Role" value={editedMember.role} onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })} />
+                        <h3>Upload Marker Image</h3>
+                        <input type="file" accept=".png" onChange={handleMarkerUpload} />
+                        {showDownloadButton && (
+                            <button onClick={handleDownloadPattern}>Download Pattern</button>
+                        )}
+                        <div id="imageContainer">
+                            {exampleMarkerURL && <img src={exampleMarkerURL} alt="Marker Preview" />}
+                        </div>
+                        {/* Pattern ratio and image size settings */}
+                        {innerImageURL && (
+                            <div>
+                                <label htmlFor="patternRatioSlider">Pattern Ratio</label>
+                                <input
+                                    id="patternRatioSlider"
+                                    type="range"
+                                    min="10"
+                                    max="90"
+                                    value={patternRatio}
+                                    onChange={handlePatternRatioChange}
+                                />
+                                <span>{patternRatio / 100}</span>
+                            </div>
+                        )}
+                        {innerImageURL && (
+                            <div>
+                                <label htmlFor="imageSizeSlider">Image Size</label>
+                                <input
+                                    id="imageSizeSlider"
+                                    type="range"
+                                    min="150"
+                                    max="2500"
+                                    value={imageSize}
+                                    onChange={handleImageSizeChange}
+                                />
+                                <span>{imageSize} px</span>
+                            </div>
+                        )}
+                        <button onClick={editingMemberId !== null ? () => handleSaveEditMember(editingMemberId) : handleAddMember}>Save</button>
+                        <button onClick={() => handleCancelMemberEdit()}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 
-
-
-
-
     if (!isLoggedIn) {
         return (
-            <div className = "admin-container">
+            <div className="admin-container">
                 <h2>Admin Login</h2>
                 <form onSubmit={handleLogin}>
                     <div>
