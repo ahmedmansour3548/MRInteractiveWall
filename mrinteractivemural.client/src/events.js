@@ -1,4 +1,4 @@
-import { AR } from './ar.js';
+import { AR } from './AR.js';
 
 /*AFRAME.registerComponent('markerhandler', {
     init: function () {
@@ -36,15 +36,32 @@ AFRAME.registerComponent('click-listener', {
         // Bind the onClick function to this component instance and listen for click events on the scene
         this.onClick = this.onClick.bind(this);
         this.el.sceneEl.addEventListener('click', this.onClick);
-        this.clipNames = ['idle', 'hiphop', 'chicken', 'pockets'];
         this.currentClipIndex = 0;
         // Prepare a new THREE.Raycaster
         this.raycaster = new THREE.Raycaster();
 
-        this.coneGeometry = new THREE.ConeGeometry(0.05, 0.2, 8)
-        const material = new THREE.MeshNormalMaterial()
+        // TODO: get reference to center marker/planes to manipulate them easier
+        
+        //this.coneGeometry = new THREE.ConeGeometry(0.05, 0.2, 8)
+        //const material = new THREE.MeshNormalMaterial()
 
-
+        this.slidePlane = (plane, speed) => {
+            const position = plane.getAttribute('position');
+            const targetX = -2; // Calculate the target X position
+            const animate = () => {
+                // Update the position
+                position.x -= speed;
+                plane.setAttribute('position', position);
+                
+                // Check if the animation should continue
+                if (position.x > targetX) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+            };
+            // Start the animation
+            animate();
+        };
     },
     remove: function () {
         // Clean up by removing the event listener if the component is removed
@@ -55,6 +72,7 @@ AFRAME.registerComponent('click-listener', {
         const clickPosition = { x: evt.clientX, y: evt.clientY };
         this.castRay(clickPosition);
     },
+
     castRay: function (clickPosition) {
         this.camera.lookAt(this.el.sceneEl.object3D.position );
         this.camera.updateMatrixWorld();
@@ -74,13 +92,29 @@ AFRAME.registerComponent('click-listener', {
             console.log(intersects);
             const firstIntersection = intersects[0].object.el; // Get the A-Frame element of the intersected object
             if (firstIntersection.matches('#_1')) {
-                console.log('Intersected with the 1!!' + firstIntersection.getAttribute('name'));
+                console.log('Intersected with the 1!!' + firstIntersection.getAttribute('id'));
                 // Additional logic based on the intersection can be added here
-                AR().loadModelById(firstIntersection.getAttribute('name'));
+                this.slidePlane(firstIntersection, 0.01);
+                const apiUrl = `https://localhost:7121/api/getGitHubModel?folderName=1`;
+
+                fetch(apiUrl)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        swapModel(plane, data.modelUrl);
+                    });
+                
             }
         }
+        
 
-
+        function swapModel(plane, newModelPath) {
+            // Find the nested a-entity element within the plane
+            const entity = plane.querySelector('a-entity');
+        
+            // Update the gltf-model attribute with the new model path
+            entity.setAttribute('gltf-model', newModelPath);
+        }
 
 
 
@@ -147,7 +181,9 @@ AFRAME.registerComponent('click-listener', {
                 });
             }
         }*/
-    }
+    },
+
+    
 });
 
 

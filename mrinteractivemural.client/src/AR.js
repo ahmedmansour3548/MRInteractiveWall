@@ -42,25 +42,22 @@ export const AR = () => {
         loadModel(currentModelIndex + 1);
     };
 
+    const updateModelPath = (newModelPath) => {
+        setModelPath(newModelPath);
+    };
 
     /**
      * Fetches and loads the model based on the provided model ID.
      */
-    const loadModelById = (id) => {
+    function loadModelById (id) {
         const apiUrl = `https://localhost:7121/api/getGitHubModel?folderName=2`;
-        console.log("gotin!");
         fetch(apiUrl)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data.modelFileName);
-                // Use this path in Production
-                //const newPath = `${data.modelFilePath}${data.modelFileName}`;
-
-                // Use this path in development (Python local server)
-                const modelPath = data.modelUrl;
 
                 // Set the model path using setModelPath
-                setModelPath(modelPath);
+                setModelPath(data.modelUrl);
             })
             .catch((error) => console.error('Error loading the model:', error));
     };
@@ -72,11 +69,6 @@ export const AR = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                // Use this path in Production
-                //const newPath = `${data.modelFilePath}${data.modelFileName}`;
-
-                // Use this path in development (Python local server)
-                //const devModelPath = "http://localhost:8000/models/" + data.modelFileName;
 
                 // Set the gltf-model path
                 setModelPath(data.modelUrl);

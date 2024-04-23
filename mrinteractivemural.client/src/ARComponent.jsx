@@ -26,13 +26,19 @@ const ARComponent = () => {
 
             {isSceneVisible && (
                 <a-scene gesture-detector arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5; debugUIEnabled: true;' click-listener>
-                    { /* Asset Manager */ }
+                    {/* Asset Manager */}
                     <a-assets>
                         <a-asset-item id="#Number1" src="horse.obj"></a-asset-item>
                         <a-asset-item id="horse-mtl" src="horse.mtl"></a-asset-item>
                         {/* Mixins allow the definition of reusable properties that can be used to easily add effects across objects */ }
                         <a-mixin id="giant" scale="5 5 5"></a-mixin>
                     </a-assets>
+
+                    
+                    
+
+
+                    {/* Center Marker */}
                     <a-marker type="pattern" preset="custom" url="/src/assets/numbers/pattern-marker.patt" id="1">
                         <a-plane id="_1" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="1" position="0 0 0" scale="3 3 3"
                             material="opacity: 1" debug-raycaster>
@@ -43,8 +49,12 @@ const ARComponent = () => {
                             </a-entity>
                             <a-text value={`Model ID: ${currentModelId}`} position="0 1 0" align="center"></a-text>
                         </a-plane>
+                        {/* Virtual Room */}
+                        <a-box id="animated-model" name="virtualroom" data-raycastable position='0 0 -0.2' scale='3 3 0.2' material='color: black; opacity: 1;'></a-box>
                     </a-marker>
-                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/002.patt" id="interactable-marker">
+
+                    {/* Marker for lab Member 1 */}
+                    <a-marker type="pattern" preset="custom" url="/src/assets/numbers/001.patt" id="interactable-marker">
                         <a-plane id="model-wrapper" cursor="rayOrigin: mouse" emitevents="true" data-raycastable name="triangle" position="0 0 0" scale="3 3 3"
                             material="opacity: 1;" debug-raycaster>
                             <a-entity id="dynamic-model" data-raycastable gltf-model="/src/assets/triangle/triangle.gltf"
