@@ -6,7 +6,7 @@ import './Home.css';
 
 const HomeComponent = () => {
     const { squares, isDrawerOpen, toggleDrawer } = Home();
-
+    
     return (
         <>
             <div className={`patternGrid ${isDrawerOpen ? 'darken' : ''}`}>

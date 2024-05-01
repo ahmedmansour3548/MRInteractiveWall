@@ -38,6 +38,10 @@ function AdminComponent() {
     const [patternRatio, setPatternRatio] = useState(50);
     const [imageSize, setImageSize] = useState(512);
 
+    const [folderNames, setFolderNames] = useState({});
+    const [patternFile, setPatternFile] = useState({});
+    const [paramFile, setParamFile] = useState({});
+
     const handleLogin = async (event) => {
         event.preventDefault();
 
@@ -79,7 +83,7 @@ function AdminComponent() {
 
             const formData = new FormData();
             formData.append('file', modelFile);
-            console.log(modelFile);
+
             const response = await axios.post('https://localhost:7121/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -96,64 +100,56 @@ function AdminComponent() {
         }
     };
 
-    const handleSaveEditModel = async () => {
-        try {
-            await axios.put(`https://localhost:7121/api/models/${editedModel.id}`, editedModel);
-            setEditedModel({});
-            setEditingModelId(null);
-            populateModels();
-            setShowModelPanel(false);
-        } catch (error) {
-            console.error('Error saving edited model:', error);
-        }
-    };
-
-
-    const handleDeleteModel = async (modelId) => {
-        const userConfirmed = window.confirm("Are you sure you want to delete this model?");
-        if (userConfirmed) {
-            try {
-                await axios.delete(`https://localhost:7121/api/models/${modelId}`);
-                populateModels();
-            } catch (error) {
-                console.error('Error deleting model:', error);
-            }
-        }
-    };
-
 
     const populateMembers = async () => {
         try {
-            const response = await axios.get('https://localhost:7121/api/members');
-            const memberNames = response.data.map(member => member.name);
-            setMemberNames(memberNames);
-            setMembers(response.data);
-            console.log("Number of members in database: " + memberNames.length);
+            const response = await axios.get('https://localhost:7121/api/getFiles');
+            // Set folderNames as an object
+            setFolderNames(response.data);
+            console.log("Number of folders in GitHub repo: " + Object.keys(response.data).length);
+            console.log(response.data);
         } catch (error) {
-            console.error('Error fetching members:', error);
+            console.error('Error fetching folders from GitHub repo:', error);
         }
     };
 
 
+
     useEffect(() => {
-        if (activeTab === 'members') {
             populateMembers();
-        }
-        else if (activeTab === 'models') {
-            populateModels();
-        }
-    }, [activeTab]);
+    }, []);
 
     const handleAddMember = async () => {
         try {
-            await axios.post('https://localhost:7121/api/members', newMember);
-            setNewMember({ name: '', number: '', email: '', note: '', role: '' }); // Reset new member form
-            setShowNewMemberForm(false); // Hide the form
-            populateMembers(); // Refresh the members list
+            // Generate folder name for the new member
+            const folderName = Object.keys(folderNames).length + 1;
+
+            // Upload member data along with files to GitHub
+            const formData = new FormData();
+
+            // Append folder name, model, .patt, and .json files
+            formData.append('folderName', folderName);
+            formData.append('modelFile', modelFile);
+            formData.append('pattFile', patternFile);
+            formData.append('paramFile', paramFile);
+
+            // Call the API to upload member data and files to GitHub
+            await axios.post('https://localhost:7121/api/uploadNewMember', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            // Reset form and refresh members list
+            setNewMember({ name: '', number: '', email: '', note: '', role: '' });
+            setShowNewMemberForm(false);
+            populateMembers();
         } catch (error) {
             console.error('Error adding new member:', error);
         }
     };
+
+
 
     const handleAddNewMember = () => {
         setEditedMember({});
@@ -161,17 +157,6 @@ function AdminComponent() {
         setShowMemberPanel(true);
     };
 
-    const handleEditModel = (model) => {
-        setEditedModel({ ...model });
-        setEditingModelId(model.id);
-        setShowModelPanel(true);
-    };
-
-    const handleCancelModelEdit = () => {
-        setEditedModel({});
-        setEditingModelId(null);
-        setShowModelPanel(false);
-    };
 
     // Function to handle image upload and display
     // Code logic from: https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/marker-training/examples/generator.html#L263
@@ -245,6 +230,17 @@ function AdminComponent() {
             }
         }
     };
+    const handleDeleteFolder = async (folderId) => {
+        const userConfirmed = window.confirm("Are you sure you want to delete this folder?");
+        if (userConfirmed) {
+            try {
+                await axios.delete(`https://localhost:7121/api/deleteGitHubFolder/${folderId}`);
+                populateMembers(); // Refresh list
+            } catch (error) {
+                console.error('Error deleting folder:', error);
+            }
+        }
+    };
 
     const handleSaveEditMember = async (memberId) => {
         try {
@@ -268,94 +264,11 @@ function AdminComponent() {
         setImageSize(newSize);
     };
 
-    const renderTabs = () => (
-        <div>
-            <button onClick={() => setActiveTab('models')}>Models</button>
-            <button onClick={() => setActiveTab('members')}>Members</button>
-        </div>
-    );
 
-    const renderModelsTab = () => (
-        <div>
-            <h3>Models</h3>
-            <button type="button" onClick={() => handleAddNewModel()}>Add New Model</button>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Model Name</th>
-                        <th>Lab Member ID</th>
-                        <th>Model File Path</th>
-                        <th>Model File Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {models.map((model) => (
-                        <tr key={model.id}>
-                            <td>{model.id}</td>
-                            <td>
-                                {model.modelName}
-                            </td>
-                            <td>
-                                {model.labMemberID}
-                            </td>
-                            <td>
-                                {model.modelFilePath}
-                            </td>
-                            <td>
-                                {model.modelFileName}
-                            </td>
-                            <td>
-                                <button onClick={() => handleEditModel(model)}>Edit</button>
-                                <button onClick={() => handleDeleteModel(model.id)}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                    {showModelPanel && (
-                        <div className="floating-panel-overlay">
-                            <div className="floating-panel">
-                                {/* Title of the floating panel */}
-                                <h3>{editingModelId !== null ? 'Edit Model' : 'Add New Model'}</h3>
-                                {/* Input fields */}
-                                <input
-                                    type="text"
-                                    placeholder="Model Name"
-                                    value={editedModel ? editedModel.modelName : ''}
-                                    onChange={(e) => setEditedModel({ ...editedModel, modelName: e.target.value })}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Lab Member ID"
-                                    value={editedModel ? editedModel.labMemberID : ''}
-                                    onChange={(e) => setEditedModel({ ...editedModel, labMemberID: e.target.value })}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Model File Path"
-                                    value={editedModel ? editedModel.modelFilePath : ''}
-                                    onChange={(e) => setEditedModel({ ...editedModel, modelFilePath: e.target.value })}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Model File Name"
-                                    value={editedModel ? editedModel.modelFileName : ''}
-                                    onChange={(e) => setEditedModel({ ...editedModel, modelFileName: e.target.value })}
-                                />
-                                <input type="file" onChange={handleModelUpload} />
-                                {/* Save and Cancel buttons */}
-                                <button onClick={editingModelId !== null ? handleSaveEditModel : handleAddModel}>Save</button>
-                                <button onClick={() => handleCancelModelEdit()}>Cancel</button>
-                            </div>
-                        </div>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    );
-
-
+    const extractFilename = (url) => {
+        const parts = url.split('/');
+        return parts[parts.length - 1];
+    };
 
     const renderMembersTab = () => (
         <div>
@@ -366,36 +279,22 @@ function AdminComponent() {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Number</th>
-                        <th>Email</th>
-                        <th>Note</th>
-                        <th>Role</th>
-                        <th>Actions</th>
+                        <th>Model</th>
+                        <th>Pattern</th>
+                        <th>Param</th>
+                        <th>Action</th> {/* New column for delete button */}
                     </tr>
                 </thead>
                 <tbody>
-                    {members.map((member) => (
-                        <tr key={member.id}>
-                            <td>{member.id}</td>
+                    {Object.keys(folderNames).map((folderId) => (
+                        <tr key={folderId}>
+                            <td>{folderId}</td>
+                            {/* Display the filenames of model, pattern, and param */}
+                            <td><a href={folderNames[folderId].model} target="_blank" rel="noopener noreferrer">{extractFilename(folderNames[folderId].model)}</a></td>
+                            <td><a href={folderNames[folderId].pattern} target="_blank" rel="noopener noreferrer">{extractFilename(folderNames[folderId].pattern)}</a></td>
+                            <td><a href={folderNames[folderId].param} target="_blank" rel="noopener noreferrer">{extractFilename(folderNames[folderId].param)}</a></td>
                             <td>
-                                {member.name}
-                            </td>
-                            <td>
-                                {member.number}
-                            </td>
-                            <td>
-                                {member.email}
-                            </td>
-                            <td>
-                                {member.note}
-                            </td>
-                            <td>
-                                {member.role}
-                            </td>
-                            <td>
-                                <button onClick={() => handleEditMember(member)}>Edit</button>
-                                <button onClick={() => handleDeleteMember(member.id)}>Delete</button>
+                                <button onClick={() => handleDeleteFolder(folderId)}>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -406,20 +305,21 @@ function AdminComponent() {
                 <div className="floating-panel-overlay">
                     <div className="floating-panel">
                         <h3>{editingMemberId !== null ? 'Edit Member' : 'Add New Member'}</h3>
-                        {/* Input fields for adding or editing a member */}
-                        <input type="text" placeholder="Name" value={editedMember.name} onChange={(e) => setEditedMember({ ...editedMember, name: e.target.value })} />
-                        <input type="text" placeholder="Number" value={editedMember.number} onChange={(e) => setEditedMember({ ...editedMember, number: e.target.value })} />
-                        <input type="text" placeholder="Email" value={editedMember.email} onChange={(e) => setEditedMember({ ...editedMember, email: e.target.value })} />
-                        <input type="text" placeholder="Note" value={editedMember.note} onChange={(e) => setEditedMember({ ...editedMember, note: e.target.value })} />
-                        <input type="text" placeholder="Role" value={editedMember.role} onChange={(e) => setEditedMember({ ...editedMember, role: e.target.value })} />
-                        <h3>Upload Marker Image</h3>
-                        <input type="file" accept=".png" onChange={handleMarkerUpload} />
-                        {showDownloadButton && (
-                            <button onClick={handleDownloadPattern}>Download Pattern</button>
-                        )}
-                        <div id="imageContainer">
-                            {exampleMarkerURL && <img src={exampleMarkerURL} alt="Marker Preview" />}
+
+                        {/* File upload UI elements */}
+                        <div>
+                            <label htmlFor="modelUpload">Upload Model</label>
+                            <input id="modelUpload" type="file" accept=".glb,.gltf" onChange={(e) => setModelFile(e.target.files[0])} />
                         </div>
+                        <div>
+                            <label htmlFor="patternUpload">Upload .patt</label>
+                            <input id="patternUpload" type="file" accept=".patt" onChange={(e) => setPatternFile(e.target.files[0])} />
+                        </div>
+                        <div>
+                            <label htmlFor="paramUpload">Upload param.json</label>
+                            <input id="paramUpload" type="file" accept=".json" onChange={(e) => setParamFile(e.target.files[0])} />
+                        </div>
+
                         {/* Pattern ratio and image size settings */}
                         {innerImageURL && (
                             <div>
@@ -457,6 +357,7 @@ function AdminComponent() {
         </div>
     );
 
+
     if (!isLoggedIn) {
         return (
             <div className="admin-container">
@@ -479,8 +380,7 @@ function AdminComponent() {
         return (
             <div className="admin-container">
                 <h2>VARLAB Mixed Reality Interactive Mural Admin Panel</h2>
-                {renderTabs()}
-                {activeTab === 'models' ? renderModelsTab() : renderMembersTab()}
+                {renderMembersTab()}
             </div>
         );
     }

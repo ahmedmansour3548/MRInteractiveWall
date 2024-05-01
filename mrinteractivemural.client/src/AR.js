@@ -20,15 +20,28 @@ export const AR = () => {
     const [currentModelIndex, setCurrentModelIndex] = useState(1);
     const [currentModelId, setCurrentModelId] = useState(1);
 
+    const [filesLinks, setFilesLinks] = useState([]);
+
     useEffect(() => {
-        // Fetch the total number of models
-        fetch('https://localhost:7121/api/models')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Number of models in database: " + data.length);
-                setModelsCount(data.length);
+        fetch('https://localhost:7121/api/getFiles')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch files links');
+                }
+                return response.json();
             })
-            .catch((error) => console.error('Error fetching models count:', error));
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setFilesLinks(data);
+                } else {
+                    // Convert object to array if needed
+                    const dataArray = Object.keys(data).map(key => data[key]);
+
+                    setFilesLinks(dataArray);
+                }
+                console.log("Files links:", filesLinks);
+            })
+            .catch((error) => console.error('Error fetching files links:', error));
     }, []);
 
     /**
@@ -42,25 +55,22 @@ export const AR = () => {
         loadModel(currentModelIndex + 1);
     };
 
+    const updateModelPath = (newModelPath) => {
+        setModelPath(newModelPath);
+    };
 
     /**
      * Fetches and loads the model based on the provided model ID.
      */
-    const loadModelById = (id) => {
+    function loadModelById (id) {
         const apiUrl = `https://localhost:7121/api/getGitHubModel?folderName=2`;
-        console.log("gotin!");
         fetch(apiUrl)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data.modelFileName);
-                // Use this path in Production
-                //const newPath = `${data.modelFilePath}${data.modelFileName}`;
-
-                // Use this path in development (Python local server)
-                const modelPath = data.modelUrl;
 
                 // Set the model path using setModelPath
-                setModelPath(modelPath);
+                setModelPath(data.modelUrl);
             })
             .catch((error) => console.error('Error loading the model:', error));
     };
@@ -72,11 +82,6 @@ export const AR = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                // Use this path in Production
-                //const newPath = `${data.modelFilePath}${data.modelFileName}`;
-
-                // Use this path in development (Python local server)
-                //const devModelPath = "http://localhost:8000/models/" + data.modelFileName;
 
                 // Set the gltf-model path
                 setModelPath(data.modelUrl);
@@ -92,5 +97,5 @@ export const AR = () => {
             .catch((error) => console.error('Error loading the model:', error));
     }
 
-    return { isSceneVisible, toggleSceneVisibility, handleSwapButtonClick, modelPath, currentModelId };
+    return { isSceneVisible, toggleSceneVisibility, handleSwapButtonClick, modelPath, currentModelId, filesLinks };
 };
