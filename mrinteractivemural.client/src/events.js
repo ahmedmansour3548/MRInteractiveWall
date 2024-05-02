@@ -1,35 +1,6 @@
 import { AR } from './AR.js';
 
-/*AFRAME.registerComponent('markerhandler', {
-    init: function () {
-        // Initialize clipNames here instead of in the schema to ensure it's always defined.
-        this.clipNames = ['idle', 'hiphop', 'chicken', 'pockets'];
-        this.currentClipIndex = 0;
-
-        this.el.addEventListener('model-loaded', () => {
-            const planeEl = this.el.querySelector('#model-wrapper');
-            if (planeEl) {
-                planeEl.addEventListener('click', () => {
-                    const targetEl = planeEl.querySelector('[gltf-model]');
-                    if (targetEl) {
-                        // Use this.clipNames and this.currentClipIndex here
-                        this.currentClipIndex = (this.currentClipIndex + 1) % this.clipNames.length;
-                        const clipName = this.clipNames[this.currentClipIndex];
-
-                        // Assuming animation-mixer component is properly attached to the entity
-                        if (targetEl.components['animation-mixer']) {
-                            console.log("Animation mixer exists!");
-                            targetEl.setAttribute('animation-mixer', `clip: ${clipName}; loop: repeat; crossFadeDuration: 0.4`);
-                            console.log(`Playing animation clip: ${clipName}`);
-                        } else {
-                            console.log("Animation mixer doesn't exist!");
-                        }
-                    }
-                });
-            }
-        });
-    }
-});*/
+// Register a custom component to handle click events and model/door animations
 AFRAME.registerComponent('click-listener', {
     init: function () {
         this.camera = this.el.sceneEl.camera;
@@ -42,7 +13,7 @@ AFRAME.registerComponent('click-listener', {
 
         this.camera.updateMatrixWorld();
 
-        // TODO: get reference to center marker/planes to manipulate them easier
+        // Get references to the center marker/planes to manipulate them easily
         this.imageLeft = this.el.sceneEl.querySelector('#centerLeft');
         this.imageRight = this.el.sceneEl.querySelector('#centerRight');
         this.centerEntity = this.el.sceneEl.querySelector('#centerEntity');
@@ -50,111 +21,20 @@ AFRAME.registerComponent('click-listener', {
         this.labMemberInfoPlane = this.el.sceneEl.querySelector('#labMemberInfoPlane');
         this.doorsOpen = false;
         this.modelURL = null;
-        //this.coneGeometry = new THREE.ConeGeometry(0.05, 0.2, 8)
-        //const material = new THREE.MeshNormalMaterial()
-        console.log(this.centerEntity);
-        this.openDoors = (speed, endPoint) => {
-            const positionLeft = this.imageLeft.getAttribute('position');
-            const positionRight = this.imageRight.getAttribute('position');
-            const animate = () => {
-                // Update the position
-                positionLeft.x -= speed;
-                positionRight.x += speed;
-                this.imageLeft.setAttribute('position', positionLeft);
-                this.imageRight.setAttribute('position', positionRight);
 
-                // Check if the animation should continue
-                if (positionRight.x < endPoint) {
-                    // Continue the animation
-                    requestAnimationFrame(animate);
-                }
-                else {
-                    this.doorsOpen = true;
-                }
-            };
-            // Start the animation
-            animate();
-        };
-
-        this.closeDoors = (speed) => {
-            const positionLeft = this.imageLeft.getAttribute('position');
-            const positionRight = this.imageRight.getAttribute('position');
-            const animate = () => {
-                // Update the position
-                positionLeft.x += speed;
-                positionRight.x -= speed;
-                this.imageLeft.setAttribute('position', positionLeft);
-                this.imageRight.setAttribute('position', positionRight);
-                // Check if the animation should continue
-                if (positionRight.x > 0.25) {
-                    // Continue the animation
-                    requestAnimationFrame(animate);
-                }
-                else {
-                    this.doorsOpen = false;
-                }
-            };
-            // Start the animation
-            animate();
-        };
-
-        this.slideImageRight = (img, speed, endPoint) => {
-            const position = img.getAttribute('position');
-            const animate = () => {
-                // Update the position
-                position.x += speed;
-                img.setAttribute('position', position);
-
-                // Check if the animation should continue
-                if (position.x < endPoint) {
-                    // Continue the animation
-                    requestAnimationFrame(animate);
-                }
-            };
-            // Start the animation
-            animate();
-        };
-
-        this.displayModel = (speed, endPoint) => {
-            const position = this.centerEntity.getAttribute('position');
-            const animate = () => {
-                // Update the position
-                position.z += speed;
-                this.centerEntity.setAttribute('position', position);
-                // Check if the animation should continue
-                if (position.z < endPoint) {
-                    // Continue the animation
-                    requestAnimationFrame(animate);
-                }
-            };
-            // Start the animation
-            animate();
-        };
-
-        this.hideModel = (speed, endPoint) => {
-            const position = this.centerEntity.getAttribute('position');
-            const animate = () => {
-                // Update the position
-                position.z -= speed;
-                this.centerEntity.setAttribute('position', position);
-                // Check if the animation should continue
-                if (position.z > endPoint) {
-                    // Continue the animation
-                    requestAnimationFrame(animate);
-                }
-                else {
-                    console.log("model animation done, closing door");
-                    this.closeDoors(0.001);
-                }
-            };
-            // Start the animation
-            animate();
-        };
+        // Define functions to open/close doors and display/hide the model
+        this.openDoors = this.openDoors.bind(this);
+        this.closeDoors = this.closeDoors.bind(this);
+        this.slideImageRight = this.slideImageRight.bind(this);
+        this.displayModel = this.displayModel.bind(this);
+        this.hideModel = this.hideModel.bind(this);
     },
+
     remove: function () {
         // Clean up by removing the event listener if the component is removed
         this.el.sceneEl.removeEventListener('click', this.onClick);
     },
+
     onClick: function (evt) {
         // Get the click position from the event
         const clickPosition = { x: evt.clientX, y: evt.clientY };
@@ -186,13 +66,9 @@ AFRAME.registerComponent('click-listener', {
                     this.hideModelAndCloseDoors();
                 }
             }
-
-
-           
         }
     },
- 
-    
+
     openDoorsAndDisplayModel: function (markerID) {
         this.openDoors(0.005, 0.5);
         setTimeout(() => {
@@ -214,61 +90,105 @@ AFRAME.registerComponent('click-listener', {
                                 console.log(jsonData);
                                 var infoText = jsonData.member.labID + "\n\n\n" + jsonData.member.name + "\n\n" + jsonData.member.role + "\n" + jsonData.member.note;
 
-
                                 if (jsonData.model) {
                                     // Apply custom model parameters
+                                    const modelParams = {
+                                        scale: "scale",
+                                        position: "position",
+                                        rotation: "rotation",
+                                        color: "color",
+                                        opacity: "opacity",
+                                        visible: "visible",
+                                        castShadow: "cast-shadow",
+                                        receiveShadow: "receive-shadow"
+                                    };
 
-                                    // Scale
-                                    if (jsonData.model.scale) {
-                                        console.log("Setting scale!");
-                                        this.centerEntity.setAttribute("scale", jsonData.model.scale);
-                                    }
-                                    else {
-                                        // Default
-                                        this.centerEntity.setAttribute("scale", "0.2 0.2 0.2");
-                                    }
-
-                                    // Position
-            /*                                    if (jsonData.model.position) {
-                                                console.log("Setting position!");
-                                                this.centerEntity.setAttribute("position", jsonData.model.position);
+                                    for (const [key, attr] of Object.entries(modelParams)) {
+                                        if (jsonData.model[key]) {
+                                            console.log(`Setting ${attr}!`);
+                                            this.centerEntity.setAttribute(attr, jsonData.model[key]);
+                                        } else {
+                                            // Set default values
+                                            switch (attr) {
+                                                case "scale":
+                                                    this.centerEntity.setAttribute(attr, "0.2 0.2 0.2");
+                                                    break;
+                                                case "position":
+                                                    this.centerEntity.setAttribute(attr, "0 0 -1");
+                                                    break;
+                                                case "rotation":
+                                                    this.centerEntity.setAttribute(attr, "0 0 0");
+                                                    break;
+                                                case "color":
+                                                    this.centerEntity.setAttribute(attr, "#ffffff");
+                                                    break;
+                                                case "opacity":
+                                                    this.centerEntity.setAttribute(attr, "1");
+                                                    break;
+                                                case "visible":
+                                                    this.centerEntity.setAttribute(attr, "true");
+                                                    break;
+                                                case "cast-shadow":
+                                                    this.centerEntity.setAttribute(attr, "true");
+                                                    break;
+                                                case "receive-shadow":
+                                                    this.centerEntity.setAttribute(attr, "true");
+                                                    break;
                                             }
-                                            else {
-                                                // Default
-                                                this.centerEntity.setAttribute("scale", "0 0 -1");
-                                            }*/
-
+                                        }
+                                    }
                                 }
 
                                 // Set the gltf-model attribute of the center entity to the model URL
                                 this.centerEntity.setAttribute("gltf-model", this.modelUrl);
+
+                                // Check for animations in the loaded model
+                                this.centerEntity.addEventListener('model-loaded', () => {
+                                    const model = this.centerEntity.getObject3D('mesh');
+                                    if (model && model.animations && model.animations.length > 0) {
+                                        console.log('Model has animations:', model.animations);
+
+                                        // Create a mixer to play the animations
+                                        this.mixer = new THREE.AnimationMixer(model);
+                                        this.clips = model.animations;
+
+                                        // Play the first animation by default
+                                        this.currentClip = this.mixer.clipAction(this.clips[0]);
+                                        this.currentClip.play();
+
+                                        // Update the animation on each frame
+                                        this.tick = (time, deltaTime) => {
+                                            if (this.mixer) {
+                                                this.mixer.update(deltaTime / 1000);
+                                            }
+                                        };
+                                        this.el.sceneEl.addBehavior(this);
+                                    }
+                                });
 
                                 // Set the plane behind text to be visible
                                 this.labMemberInfoPlane.setAttribute("visible", true);
 
                                 // Set the value of the text attribute to the extracted information
                                 this.labMemberInfo.setAttribute("value", infoText);
-
                             })
                             .catch((error) => console.error('Error fetching JSON file:', error));
                     })
                     .catch((error) => console.error('Error fetching model URL:', error));
             }
-            
             this.displayModel(0.005, 1);
-        }, 1000); // Delay displayModel for 1
+        }, 1000); // Delay displayModel for 1 second
     },
 
     hideModelAndCloseDoors: function () {
         this.hideModel(0.005, -1);
         setTimeout(() => {
             this.closeDoors(0.005);
-        }, 5000); // Delay closing doors for 1
+        }, 5000); // Delay closing doors for 5 seconds
     },
-    
 });
 
-
+// Register a debug component to log raycaster intersections
 AFRAME.registerComponent('debug-raycaster', {
     init: function () {
         this.el.addEventListener('raycaster-intersected', evt => {
