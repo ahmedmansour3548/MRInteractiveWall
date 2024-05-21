@@ -3,9 +3,10 @@ import { AR } from './AR.js';
 // Register a custom component to handle click events and model/door animations
 AFRAME.registerComponent('click-listener', {
     init: function () {
+        
         this.camera = this.el.sceneEl.camera;
-        // Bind the onClick function to this component instance and listen for click events on the scene
-        this.onClick = this.onClick.bind(this);
+        // Use an arrow function to bind the onClick function to this component instance and listen for click events on the scene
+        this.onClick = (evt) => this.castRay({ x: evt.clientX, y: evt.clientY });
         this.el.sceneEl.addEventListener('click', this.onClick);
         this.currentClipIndex = 0;
         // Prepare a new THREE.Raycaster
@@ -21,13 +22,103 @@ AFRAME.registerComponent('click-listener', {
         this.labMemberInfoPlane = this.el.sceneEl.querySelector('#labMemberInfoPlane');
         this.doorsOpen = false;
         this.modelURL = null;
+        this.openDoors = (speed, endPoint) => {
+            const positionLeft = this.imageLeft.getAttribute('position');
+            const positionRight = this.imageRight.getAttribute('position');
+            const animate = () => {
+                // Update the position
+                positionLeft.x -= speed;
+                positionRight.x += speed;
+                this.imageLeft.setAttribute('position', positionLeft);
+                this.imageRight.setAttribute('position', positionRight);
 
-        // Define functions to open/close doors and display/hide the model
-        this.openDoors = this.openDoors.bind(this);
-        this.closeDoors = this.closeDoors.bind(this);
-        this.slideImageRight = this.slideImageRight.bind(this);
-        this.displayModel = this.displayModel.bind(this);
-        this.hideModel = this.hideModel.bind(this);
+                // Check if the animation should continue
+                if (positionRight.x < endPoint) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+                else {
+                    this.doorsOpen = true;
+                }
+            };
+            // Start the animation
+            animate();
+        };
+
+        this.closeDoors = (speed) => {
+            const positionLeft = this.imageLeft.getAttribute('position');
+            const positionRight = this.imageRight.getAttribute('position');
+            const animate = () => {
+                // Update the position
+                positionLeft.x += speed;
+                positionRight.x -= speed;
+                this.imageLeft.setAttribute('position', positionLeft);
+                this.imageRight.setAttribute('position', positionRight);
+                // Check if the animation should continue
+                if (positionRight.x > 0.25) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+                else {
+                    this.doorsOpen = false;
+                }
+            };
+            // Start the animation
+            animate();
+        };
+
+        this.slideImageRight = (img, speed, endPoint) => {
+            const position = img.getAttribute('position');
+            const animate = () => {
+                // Update the position
+                position.x += speed;
+                img.setAttribute('position', position);
+
+                // Check if the animation should continue
+                if (position.x < endPoint) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+            };
+            // Start the animation
+            animate();
+        };
+
+        this.displayModel = (speed, endPoint) => {
+            const position = this.centerEntity.getAttribute('position');
+            const animate = () => {
+                // Update the position
+                position.z += speed;
+                this.centerEntity.setAttribute('position', position);
+                // Check if the animation should continue
+                if (position.z < endPoint) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+            };
+            // Start the animation
+            animate();
+        };
+
+        this.hideModel = (speed, endPoint) => {
+            const position = this.centerEntity.getAttribute('position');
+            const animate = () => {
+                // Update the position
+                position.z -= speed;
+                this.centerEntity.setAttribute('position', position);
+                // Check if the animation should continue
+                if (position.z > endPoint) {
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
+                else {
+                    console.log("model animation done, closing door");
+                    this.closeDoors(0.001);
+                }
+            };
+            // Start the animation
+            animate();
+        };
     },
 
     remove: function () {
@@ -38,6 +129,7 @@ AFRAME.registerComponent('click-listener', {
     onClick: function (evt) {
         // Get the click position from the event
         const clickPosition = { x: evt.clientX, y: evt.clientY };
+        console.log("yeet");
         this.castRay(clickPosition);
     },
 
